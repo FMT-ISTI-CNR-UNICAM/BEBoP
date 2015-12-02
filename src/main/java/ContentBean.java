@@ -21,6 +21,8 @@ import org.icefaces.ace.component.fileentry.FileEntry;
 import org.icefaces.ace.component.fileentry.FileEntryEvent;
 import org.icefaces.ace.component.fileentry.FileEntryResults;
 
+import eu.learnpad.verification.plugin.bpmn.guideline.factory.GuidelinesFactory;
+
 
 
 
@@ -34,19 +36,37 @@ public class ContentBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2574895928017048791L;
-	private String Title;
+	
 	private int id;
 	private String Content;
 	private String restid;
 	private String filecontent;
 	private String filename;
-
-
+	private String status;
+	private GuidelinesFactory guidelinesfactory;
 
 
 
 	public ContentBean(){
 
+	}
+
+	
+
+
+
+
+	public GuidelinesFactory getGuidelinesfactory() {
+		return guidelinesfactory;
+	}
+
+
+
+
+
+
+	public void setGuidelinesfactory(GuidelinesFactory guidelinefactory) {
+		this.guidelinesfactory = guidelinefactory;
 	}
 
 
@@ -85,6 +105,16 @@ public class ContentBean implements Serializable{
 
 	public void setContent(String content) {
 		Content = content;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public void sampleListener(FileEntryEvent e) {
@@ -135,6 +165,41 @@ public class ContentBean implements Serializable{
 			this.setRestid(id);
 
 			System.out.println("Submit Clicked: " + Content + ", " + id + "; ");
+			
+			
+			target = client.target("http://localhost:8080").path("verification-component-understandability-plugin/validatemodel/"+id+"/status");
+			String 	status ="";
+			while (!status.equals("OK")) {
+				
+			
+			status = target.request().get(String.class);
+			
+				this.setStatus(status);
+			}
+			System.out.println("Status: "+status);
+			
+			
+			target = client.target("http://localhost:8080").path("verification-component-understandability-plugin/validatemodel/"+id);
+			Response response2 =  target.request().get();
+
+			GuidelinesFactory glres = response2.readEntity(GuidelinesFactory.class);
+			this.setGuidelinesfactory(glres);
+			 context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getRequestMap().put("guidelinefactory", glres);
+			
+			GuidelinesFactory res = context.
+			getApplication().
+			evaluateExpressionGet(context, "#{ContentAnalysis.guidelinefactory}", GuidelinesFactory.class);
+
+			
+			
+			System.out.println("Guideline: "+this.getGuidelinesfactory());
+			//this.setCollectionannotatedcontent(
+			//annotatecontent.readEntity(
+			//new GenericType<Collection<AnnotatedCollaborativeContentAnalysis>>() {}));
+
+			
+			
 		}
 	}
 }

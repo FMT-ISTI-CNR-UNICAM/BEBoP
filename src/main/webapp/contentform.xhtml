@@ -12,6 +12,10 @@
 	<title>Single Submit - Form</title>
 </h:head>
 <h:body>
+<ace:submitMonitor blockUI="@all" idleLabel="Not currently submitting"
+    activeLabel="Busy submitting to server..." for="Form" serverErrorLabel="Server error"
+                                       networkErrorLabel="Network error"
+                                       sessionExpiredLabel="Session expired" />
 	<h:form>
 		<h:panelGrid columns="3" border="0">
 			<h:outputLabel for="inputfile" value="Input BPMN File:" />
@@ -27,14 +31,10 @@
 		</h:panelGrid>
 
 
-
-
-		
-
 		<h:commandButton value="Submit"
 			action="#{pageController.navigatePageGetAnalysis}"
 			actionListener="#{ContentBean.submitButton}" >
- <!--  <f:setPropertyActionListener target="#{ContentAnalysisBean.id}"  value="#{ContentBean.restid}" />-->
+   <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
 </h:commandButton>
 
 <h:commandButton value="Refresh" action="#{pageController.navigatePageCF}" immediate="true"/>
