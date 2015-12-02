@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://xmlns.jcp.org/jsf/html"
+ xmlns:f="http://xmlns.jcp.org/jsf/core"
+ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core">
+<h:head>
+	<title>Single Submit - Form</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="3" border="0">
+			<h:outputLabel for="inputfile" value="Input BPMN File:" />
+			<ace:fileEntry id="inputfile"  required="true"
+				fileEntryListener="#{ContentBean.sampleListener}" immediate="true"
+				maxFileCount="1" maxFileSizeMessage="File size cannot exceed 1 MB" maxFileSize="1024000" />
+			<h:message for="inputfile" />
+			
+			
+
+			
+			
+		</h:panelGrid>
+
+
+
+
+		
+
+		<h:commandButton value="Submit"
+			action="#{pageController.navigatePageGetAnalysis}"
+			actionListener="#{ContentBean.submitButton}" >
+ <!--  <f:setPropertyActionListener target="#{ContentAnalysisBean.id}"  value="#{ContentBean.restid}" />-->
+</h:commandButton>
+
+<h:commandButton value="Refresh" action="#{pageController.navigatePageCF}" immediate="true"/>
+<h:commandButton value="Return" action="#{pageController.navigatePage1}" immediate="true"/> 
+
+	</h:form>
+
+	<br />
+
+	<h:panelGrid columns="2" border="1">
+		<f:facet name="header">
+			Content Information
+		</f:facet>
+		<h:outputLabel for="contentout" value="Content:" />
+		<h:outputText id="contentout" value="#{ContentBean.content}" />
+
+		<h:outputLabel for="restOut" value="REstID:" />
+		<h:outputText id="restOut" value="#{ContentBean.restid}">
+			<f:param name="rest" value="#{ContentBean.restid}" />
+		</h:outputText>
+
+	</h:panelGrid>
+</h:body>
+</html>
