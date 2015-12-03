@@ -35,6 +35,8 @@
 			action="#{pageController.navigatePageGetAnalysis}"
 			actionListener="#{ContentBean.submitButton}" >
    <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
+   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
+    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" />
 </h:commandButton>
 
 <h:commandButton value="Refresh" action="#{pageController.navigatePageCF}" immediate="true"/>

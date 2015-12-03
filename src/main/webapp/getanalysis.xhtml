@@ -37,7 +37,12 @@
 </h:head>
 <h:body>
 
-	<h:form id="Form">
+	<h:form>
+
+
+
+
+
 
 
 
@@ -56,33 +61,45 @@
 	</h:form>
 
 	<div class="content" id="js-drop-zone">
-				<div id="diagramCanvas"></div>
-			</div>
+		<div id="diagramCanvas"></div>
+	</div>
 
-			<script>
-				$(document).ready(function() {
-					var BpmnViewer = window.BpmnJS;
-					var viewer = new BpmnViewer({container: '#diagramCanvas'});
+	<script>
+	 	 var r = new FileReader();
+	
+		alert('start of function');
+		
+		
+		
+		console.log('#{DataAnalysis.data}');
+		
+		
+		var data =' #{DataAnalysis.data}';
+		openFromUrl(data);
+		
+		function openFromUrl(data) {
+			var BpmnViewer = window.BpmnJS;
+			var viewer = new BpmnViewer({
+				container : '#diagramCanvas'
+			});
 
-					var container = $('#js-drop-zone');
+			var container = $('#js-drop-zone');
 
-					$.get('pizza.bpmn', function(xml) {
-						  viewer.importXML(xml, function(err) {
-								if (err) {
-							    	console.log('error rendering', err);
-								} else {
-								    var canvas = viewer.get('canvas');
-							   		// zoom to fit full viewport
-							   		canvas.zoom('fit-viewport');
-		   							container.removeClass('with-error')
-										     .addClass('with-diagram');
-									}
-							});
-					});
+			viewer.importXML(data, function(err) {
+				if (err) {
+					console.log('error rendering', err);
+				} else {
+					var canvas = viewer.get('canvas');
+					// zoom to fit full viewport
+					canvas.zoom('fit-viewport');
+					container.removeClass('with-error')
+							.addClass('with-diagram');
+				}
+			});
 
-				});
-			</script>
-			<h:outputStylesheet library="css" name="modeler.css" />
+		};
+	</script>
+	<h:outputStylesheet library="css" name="modeler.css" />
 
 	<br />
 	<h:outputText style="font-weight: bold;font-size:200%;"

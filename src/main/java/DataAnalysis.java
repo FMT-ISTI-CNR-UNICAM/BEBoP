@@ -1,6 +1,13 @@
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -20,26 +27,25 @@ public class DataAnalysis implements Serializable{
 	private static final long serialVersionUID = 4802290213871735048L;
 
 	private GuidelinesFactory guidelinesfactory;
+	private String filename;
+	private String xmldata;
 
 	public DataAnalysis(){
-		
+
 		System.out.println("DataAnalysisbean "+guidelinesfactory);
-	//	listdata = new ArrayList<DataContent>();
+		//	listdata = new ArrayList<DataContent>();
 	}
 
 
 
-	/*public DataContentAnalysis(AnnotatedCollaborativeContentAnalysis acca) {
-		this.acca = acca;
-		listdata = new ArrayList<DataContent>();
-		createData();
-	}*/
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
 
-
-	
-
-
+	public void setXmldata(String xml){
+		xmldata=xml; 
+	}
 
 	public void setGuidelinesfactory(GuidelinesFactory guidelinesfactory) {
 		this.guidelinesfactory = guidelinesfactory;
@@ -70,7 +76,16 @@ public class DataAnalysis implements Serializable{
 		return sw.toString();
 	}
 
-
+	public String getUri(){
+		
+		return filename;
+		//return "/Users/isiu/Downloads/24485.bpmn";
+	}
+	
+	public String getData(){
+		String res =  xmldata.replaceAll("\"","\\\\\"").replaceAll("\n", "").replaceAll("\r", "");
+		return res;
+	}
 
 	/*public void setXml(String xml) {
 		this.xml = xml;
@@ -82,9 +97,9 @@ public class DataAnalysis implements Serializable{
 		return element;
 	}
 
-	
-	
-	
+
+
+
 
 	public String executeListener(){
 

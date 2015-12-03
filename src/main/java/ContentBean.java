@@ -71,6 +71,21 @@ public class ContentBean implements Serializable{
 
 
 
+	
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+
+
+
+
+	
+
+
 
 
 
@@ -131,7 +146,7 @@ public class ContentBean implements Serializable{
 				Path path = Paths.get(fileInfo.getFile().getAbsolutePath());
 				try {
 					filecontent = 	new String(Files.readAllBytes(path), "UTF8");
-					filename = fileInfo.getFileName();
+					filename = fileInfo.getFile().toString();// fileInfo.getFileName();
 					System.out.println(filecontent);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -184,12 +199,12 @@ public class ContentBean implements Serializable{
 
 			GuidelinesFactory glres = response2.readEntity(GuidelinesFactory.class);
 			this.setGuidelinesfactory(glres);
-			 context = FacesContext.getCurrentInstance();
-			context.getExternalContext().getRequestMap().put("guidelinefactory", glres);
+			// context = FacesContext.getCurrentInstance();
+			//context.getExternalContext().getRequestMap().put("guidelinefactory", glres);
 			
-			GuidelinesFactory res = context.
-			getApplication().
-			evaluateExpressionGet(context, "#{ContentAnalysis.guidelinefactory}", GuidelinesFactory.class);
+			//GuidelinesFactory res = context.
+			//getApplication().
+			//evaluateExpressionGet(context, "#{ContentAnalysis.guidelinefactory}", GuidelinesFactory.class);
 
 			
 			
