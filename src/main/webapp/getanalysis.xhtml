@@ -20,6 +20,8 @@
 	<h:outputStylesheet library="webjars"
 		name="bpmn-js/0.12.0-0/assets/bpmn-font/css/bpmn-embedded.css" />
 
+	<h:outputStylesheet library="css" name="modeler.css" />
+	
 	<!-- load jquery -->
 	<h:outputScript library="webjars" name="jquery/2.1.3/jquery.js" />
 
@@ -34,6 +36,7 @@
 	<h:outputScript library="webjars"
 		name="bpmn-js/0.12.0-0/bpmn-navigated-viewer.min.js" />
 
+	
 </h:head>
 <h:body>
 
@@ -58,25 +61,27 @@
 
 		<h:commandButton value="go to 13" action="page13?faces-redirect=true" />
 
+<br/>
+	 
+            
+               
+
+
 	</h:form>
 
-	<div class="content" id="js-drop-zone">
+	
+      
+  
+
+<div class="content" id="js-drop-zone">
 		<div id="diagramCanvas"></div>
 	</div>
-
-	<script>
-	 	 var r = new FileReader();
-	
-		alert('start of function');
-		
-		
-		
-		console.log('#{DataAnalysis.data}');
-		
-		
+<h:outputScript>	
 		var data =' #{DataAnalysis.data}';
-		openFromUrl(data);
 		
+		if(data!=null){
+		openFromUrl(data);
+		}
 		function openFromUrl(data) {
 			var BpmnViewer = window.BpmnJS;
 			var viewer = new BpmnViewer({
@@ -91,17 +96,26 @@
 				} else {
 					var canvas = viewer.get('canvas');
 					// zoom to fit full viewport
-					canvas.zoom('fit-viewport');
+				
 					container.removeClass('with-error')
 							.addClass('with-diagram');
 				}
 			});
 
 		};
-	</script>
-	<h:outputStylesheet library="css" name="modeler.css" />
+	</h:outputScript>
+	
+	
 
 	<br />
+	
+	
+	<br />
+	
+
+		
+	
+	
 	<h:outputText style="font-weight: bold;font-size:200%;"
 		value="XML Version:" />
 	<br />

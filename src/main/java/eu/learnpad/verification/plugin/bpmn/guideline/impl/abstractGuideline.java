@@ -14,12 +14,14 @@ import java.util.Collection;
 
 
 
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
+
 
 
 
@@ -88,6 +90,12 @@ public  class abstractGuideline  {
 
 
 
+	public Collection<ElementID> getElements() {
+		return Elements;
+	}
+
+
+
 	public void setElements(String element, String refprocessid) {
 		if(Elements==null){
 			Elements = new ArrayList<ElementID>();
@@ -128,6 +136,14 @@ public  class abstractGuideline  {
 			return "IN PROGRESS";
 		}
 
+	}
+	
+	public String getColor(){
+		String color ="#FF0000";
+		if(Elements.isEmpty()){
+			color ="#00FF7F";
+		}
+		return color;
 	}
 	
 }

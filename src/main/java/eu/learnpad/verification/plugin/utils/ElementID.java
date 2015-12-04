@@ -24,5 +24,15 @@ public class ElementID {
 	}
 
 
+	public String getRefprocessid() {
+		return refprocessid;
+	}
+
+
+	public String getValue() {
+		return value;
+	}
+
+	
     
 }
