@@ -63,32 +63,29 @@
 
 <br/>
 	 
-             <h:form id="formacco">
-            <ace:accordion id="accordionss" collapsible="true" autoHeight="false">
+            
+                <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">
             <c:forEach items="#{DataAnalysis.guidelines}"
 			var="data" varStatus="status">
-                <ace:accordionPane id="toDoList" title="GuideLane ID: #{data.id} - #{data.name}" style="background-color: #{data.color}">
-                       <h:outputText value="Description: #{data.description}"/>
-                     
-                        <h:outputText value="Suggestion: #{data.suggestion}"/>
+                <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}" >
+                       <h:outputText  id="toD_#{status.index}" value="Description: #{data.description}"/>
+                     <br/>
+                        <h:outputText  id="toSE_#{status.index}"  value="Suggestion: #{data.suggestion}"/>
+                         <c:if test="not empty data.elements">
                         <c:forEach  items="#{data.elements}"
 			var="element" varStatus="statusele">
-                         <h:outputText value="Element ID: #{element.value} #{element.refprocessid}"/>
+                         <h:outputText  id="toEL_#{statusele.index}" value="Element ID: #{element.value} #{element.refprocessid}"/>
                         </c:forEach>
+                        </c:if>
                 </ace:accordionPane>
                 </c:forEach>
                 </ace:accordion>
-                </h:form>
-               
 
 
 	</h:form>
 
 	
-      
-  
-
-<div class="content" id="js-drop-zone">
+      	<div class="content" id="js-drop-zone">
 		<div id="diagramCanvas"></div>
 	</div>
 <h:outputScript>	
@@ -119,7 +116,9 @@
 
 		};
 	</h:outputScript>
-	
+  
+
+
 	
 
 	<br />
