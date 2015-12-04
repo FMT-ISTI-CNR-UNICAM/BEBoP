@@ -8,7 +8,8 @@
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ace="http://www.icefaces.org/icefaces/components"
 	xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Result - Analysis</title>
 
@@ -69,11 +70,8 @@
             <c:forEach items="#{DataAnalysis.guidelines}"
 			var="data" varStatus="status">
                <!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
-               <ace:panel id="panel_#{status.index}" style="background: #{data.color};"
-                       header="GuideLane ID: #{data.id} - #{data.name}"
-                       closable="false"
-                       toggleable="true"
-                       collapsed="true">  
+                <p:accordionPanel value="acc_#{status.index}" var="car_#{status.index}" style="border: 1px solid #a8a8a8; >
+        <p:tab title="GuideLane ID: #{data.id} - #{data.name}" titleStyle="background: #{data.color};">
                  <h:outputText  id="toDE_#{status.index}" value="Description: " style="font-weight: bold;"/>
                        <h:outputText  id="toD_#{status.index}" value="#{data.description}"/>
 
@@ -86,7 +84,8 @@
                          <h:outputText  id="toEL_#{statusele.index}" value="Element ID: #{element.value} #{element.refprocessid}"/>
                         </c:forEach>
                         </c:if>
-                       </ace:panel>
+                   </p:tab>
+    </p:accordionPanel> 
             <!--   </ace:accordionPane>-->
                 </c:forEach>
                 <!-- </ace:accordion>-->
