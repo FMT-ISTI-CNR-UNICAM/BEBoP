@@ -38,7 +38,7 @@ public class PageController implements Serializable {
 	}
 	
 	public String navigatePageCF() {
-		System.out.println("Redirect to Page 2");
+		System.out.println("Redirect to Page form");
 		
 		return "contentform?faces-redirect=true";
 	}
