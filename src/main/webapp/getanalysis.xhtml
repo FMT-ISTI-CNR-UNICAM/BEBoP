@@ -70,7 +70,7 @@
             <c:forEach items="#{DataAnalysis.guidelines}"
 			var="data" varStatus="status">
                <!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
-                <p:accordionPanel value="acc_#{status.index}" var="car_#{status.index}" style="border: 1px solid #a8a8a8; >
+                <p:accordionPanel value="acc_#{status.index}" var="car_#{status.index}" style="border: 1px solid #a8a8a8;" >
         <p:tab title="GuideLane ID: #{data.id} - #{data.name}" titleStyle="background: #{data.color};">
                  <h:outputText  id="toDE_#{status.index}" value="Description: " style="font-weight: bold;"/>
                        <h:outputText  id="toD_#{status.index}" value="#{data.description}"/>
