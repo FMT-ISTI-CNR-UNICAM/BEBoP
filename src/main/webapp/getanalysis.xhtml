@@ -65,12 +65,18 @@
 <br/>
 	 
             
-                <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">
+             <!--    <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">-->
             <c:forEach items="#{DataAnalysis.guidelines}"
 			var="data" varStatus="status">
-                <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >
+               <!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
+               <ace:panel id="panel_#{status.index}" style="background: #{data.color};"
+                       header="GuideLane ID: #{data.id} - #{data.name}"
+                       closable="false"
+                       toggleable="true"
+                       collapsed="true">  
                  <h:outputText  id="toDE_#{status.index}" value="Description: " style="font-weight: bold;"/>
                        <h:outputText  id="toD_#{status.index}" value="#{data.description}"/>
+
                      <br/>
                        <h:outputText  id="toDES_#{status.index}" value="Suggestion: " style="font-weight: bold;"/>
                         <h:outputText  id="toSE_#{status.index}"  value="#{data.suggestion}"/>
@@ -80,9 +86,10 @@
                          <h:outputText  id="toEL_#{statusele.index}" value="Element ID: #{element.value} #{element.refprocessid}"/>
                         </c:forEach>
                         </c:if>
-                </ace:accordionPane>
+                       </ace:panel>
+            <!--   </ace:accordionPane>-->
                 </c:forEach>
-                </ace:accordion>
+                <!-- </ace:accordion>-->
 
 
 	</h:form>
@@ -111,7 +118,7 @@
 				} else {
 					var canvas = viewer.get('canvas');
 					// zoom to fit full viewport
-				
+					canvas.zoom('fit-viewport');
 					container.removeClass('with-error')
 							.addClass('with-diagram');
 				}
