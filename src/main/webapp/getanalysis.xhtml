@@ -63,7 +63,22 @@
 
 <br/>
 	 
-            
+             <h:form id="formacco">
+            <ace:accordion id="accordionss" collapsible="true" autoHeight="false">
+            <c:forEach items="#{DataAnalysis.guidelines}"
+			var="data" varStatus="status">
+                <ace:accordionPane id="toDoList" title="GuideLane ID: #{data.id} - #{data.name}" style="background-color: #{data.color}">
+                       <h:outputText value="Description: #{data.description}"/>
+                     
+                        <h:outputText value="Suggestion: #{data.suggestion}"/>
+                        <c:forEach  items="#{data.elements}"
+			var="element" varStatus="statusele">
+                         <h:outputText value="Element ID: #{element.value} #{element.refprocessid}"/>
+                        </c:forEach>
+                </ace:accordionPane>
+                </c:forEach>
+                </ace:accordion>
+                </h:form>
                
 
 
