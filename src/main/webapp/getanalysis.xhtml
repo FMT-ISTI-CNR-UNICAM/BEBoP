@@ -62,18 +62,19 @@
 <br/>
 	 
             
-             <!--    <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">-->
+             <!--    <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">
+           
             <c:forEach items="#{DataAnalysis.guidelines}"
-			var="data" varStatus="status">
+			var="data" varStatus="status">-->
                <!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
-                <p:accordionPanel value="acc_#{status.index}" var="car_#{status.index}" style="border: 1px solid #a8a8a8;" >
+               <p:accordionPanel value="#{DataAnalysis.guidelines}" var="data" style="border: 1px solid #a8a8a8;" multiple="false"  >
         <p:tab title="GuideLane ID: #{data.id} - #{data.name}" titleStyle="background: #{data.color};">
-                 <h:outputText  id="toDE_#{status.index}" value="Description: " style="font-weight: bold;"/>
-                       <h:outputText  id="toD_#{status.index}" value="#{data.description}"/>
+                 <h:outputText   value="Description: " style="font-weight: bold;"/>
+                       <h:outputText   value="#{data.description}"/>
 
                      <br/>
-                       <h:outputText  id="toDES_#{status.index}" value="Suggestion: " style="font-weight: bold;"/>
-                        <h:outputText  id="toSE_#{status.index}"  value="#{data.suggestion}"/>
+                       <h:outputText   value="Suggestion: " style="font-weight: bold;"/>
+                        <h:outputText   value="#{data.suggestion}"/>
                          <c:if test="not empty data.elements">
                         <c:forEach  items="#{data.elements}"
 			var="element" varStatus="statusele">
@@ -82,8 +83,8 @@
                         </c:if>
                    </p:tab>
     </p:accordionPanel> 
-            <!--   </ace:accordionPane>-->
-                </c:forEach>
+            <!--   </ace:accordionPane>
+                </c:forEach>-->
                 <!-- </ace:accordion>-->
 
 
