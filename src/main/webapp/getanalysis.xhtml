@@ -154,7 +154,8 @@
 		   					    ];
 
 		   					    events.forEach(function(event) {
-									if(event!=null and eventBus!=null){
+									if(event!=null)
+									if(eventBus!=null){
 		   					      eventBus.on(event, function(e) {
 		   					        // e.element = the model element
 		   					        // e.gfx = the graphical element

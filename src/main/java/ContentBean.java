@@ -208,7 +208,7 @@ public class ContentBean implements Serializable{
 
 			
 			
-			System.out.println("Guideline: "+this.getGuidelinesfactory());
+			//System.out.println("Guideline: "+this.getGuidelinesfactory());
 			//this.setCollectionannotatedcontent(
 			//annotatecontent.readEntity(
 			//new GenericType<Collection<AnnotatedCollaborativeContentAnalysis>>() {}));
