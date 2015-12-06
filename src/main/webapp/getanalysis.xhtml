@@ -23,7 +23,7 @@
 		name="bpmn-js/0.12.0-0/assets/bpmn-font/css/bpmn-embedded.css" />
 
 	<h:outputStylesheet library="css" name="modeler.css" />
-	
+
 	<!-- load jquery -->
 	<h:outputScript library="webjars" name="jquery/2.1.3/jquery.js" />
 
@@ -37,8 +37,8 @@
 	<!-- bpmn-js viewer -->
 	<h:outputScript library="webjars"
 		name="bpmn-js/0.12.0-0/bpmn-navigated-viewer.min.js" />
+	<h:outputScript library="webjars" name="bpmn-js/0.12.0-0/bpmn-viewer.js" />
 
-	
 </h:head>
 <h:body>
 
@@ -52,61 +52,69 @@
 
 
 
-		
+
 		<h:commandButton value="Return"
 			action="#{pageController.navigatePageCF}" />
-		
 
-		
 
-<br/>
-	 
-            
-             <!--    <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">
+
+
+		<br />
+
+
+		<!--    <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">
            
             <c:forEach items="#{DataAnalysis.guidelines}"
 			var="data" varStatus="status">-->
-               <!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
-               <p:accordionPanel value="#{DataAnalysis.guidelines}" var="data" style="border: 1px solid #a8a8a8;" multiple="false"  >
-        <p:tab title="GuideLane ID: #{data.id} - #{data.name}" titleStyle="background: #{data.color};">
-                 <h:outputText   value="Description: " style="font-weight: bold;"/>
-                       <h:outputText   value="#{data.description}"/>
+		<!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
+		<p:accordionPanel value="#{DataAnalysis.guidelines}" var="data"
+			style="border: 1px solid #a8a8a8;" multiple="false">
+			<p:tab title="GuideLane ID: #{data.id} - #{data.name}"
+				titleStyle="background: #{data.color};">
+				<h:outputText value="Description: " style="font-weight: bold;" />
+				<h:outputText value="#{data.description}" />
 
-                     <br/>
-                       <h:outputText   value="Suggestion: " style="font-weight: bold;"/>
-                        <h:outputText   value="#{data.suggestion}"/>
-                        <br/>
-                         <p:accordionPanel value="#{data.elements}" var="element" style="border: 1px solid #a8a8a8;" multiple="false"  >
-                         
-                        <p:tab title="Element Name: #{element.name}" titleStyle="background: #{data.color};">
-                         <h:outputText   value="Element ID: #{element.value} Process Ref: #{element.refprocessid}"/>
-                       
-                        </p:tab>
-                        </p:accordionPanel> 
-                   </p:tab>
-    </p:accordionPanel> 
-            <!--   </ace:accordionPane>
+				<br />
+				<h:outputText value="Suggestion: " style="font-weight: bold;" />
+				<h:outputText value="#{data.suggestion}" />
+				<br />
+				<p:accordionPanel value="#{data.elements}" var="element"
+					style="border: 1px solid #a8a8a8;" multiple="false">
+
+					<p:tab title="Element Name: #{element.name}"
+						titleStyle="background: #{data.color};">
+						<h:outputText
+							value="Element ID: #{element.value} Process Ref: #{element.refprocessid}" />
+
+					</p:tab>
+				</p:accordionPanel>
+			</p:tab>
+		</p:accordionPanel>
+		<!--   </ace:accordionPane>
                 </c:forEach>-->
-                <!-- </ace:accordion>-->
+		<!-- </ace:accordion>-->
 
 
 	</h:form>
 
-	
-      	<div class="content" id="js-drop-zone">
+
+	<div class="content" id="js-drop-zone">
 		<div id="diagramCanvas"></div>
 	</div>
-<h:outputScript>	
+	<h:outputScript>	
 		var data =' #{DataAnalysis.data}';
 		
 		if(data!=null){
 		openFromUrl(data);
 		}
+		
 		function openFromUrl(data) {
 			var BpmnViewer = window.BpmnJS;
 			var viewer = new BpmnViewer({
 				container : '#diagramCanvas'
 			});
+	
+
 
 			var container = $('#js-drop-zone');
 
@@ -119,25 +127,69 @@
 					canvas.zoom('fit-viewport');
 					container.removeClass('with-error')
 							.addClass('with-diagram');
+					var guidelineelements = '#{DataAnalysis.elements}';
+					if(guidelineelements!=null){
+						var gs= guidelineelements.split(",");
+							gs.forEach(function(elements) {
+							console.log(elements);
+								var ele = elements.replace('[','').replace(']','').replace(' ','');
+										canvas.addMarker(ele, 'highlight');
+						
+								});
+					}
+							 
+							 
+						
+		   						
+		   						 var eventBus = viewer.get('eventBus');
+
+		   					    // you may hook into any of the following events
+		   					    var events = [
+		   					      'element.hover',
+		   					      'element.out',
+		   					      'element.click',
+		   					      'element.dblclick',
+		   					      'element.mousedown',
+		   					      'element.mouseup'
+		   					    ];
+
+		   					    events.forEach(function(event) {
+									if(event!=null and eventBus!=null){
+		   					      eventBus.on(event, function(e) {
+		   					        // e.element = the model element
+		   					        // e.gfx = the graphical element
+		   					        if(event=='element.click')
+									alert("Element ID: "+ e.element.id);
+		   					        console.log(event, 'on', e.element.id);
+		   					      });
+		   					      }
+		   					    });	
+							
+						
 				}
 			});
+			
+			
 
 		};
-	</h:outputScript>
-  
-
-
-	
-
-	<br />
-	
-	
-	<br />
-	
-
 		
-	
-	
+		
+		
+	</h:outputScript>
+
+
+
+
+
+	<br />
+
+
+	<br />
+
+
+
+
+
 	<h:outputText style="font-weight: bold;font-size:200%;"
 		value="XML Version:" />
 	<br />

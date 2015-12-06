@@ -1,13 +1,7 @@
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.StringWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
@@ -18,6 +12,7 @@ import javax.xml.bind.Marshaller;
 
 import eu.learnpad.verification.plugin.bpmn.guideline.factory.GuidelinesFactory;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.abstractGuideline;
+import eu.learnpad.verification.plugin.utils.ElementID;
 
 @ManagedBean(name="DataAnalysis")
 @SessionScoped
@@ -60,6 +55,17 @@ public class DataAnalysis implements Serializable{
 			return null;
 	}
 
+	public Collection<ElementID>  getElements(){
+		Collection<ElementID> Elements = new ArrayList<ElementID>();
+		Collection<abstractGuideline> guidelines = this.getGuidelines();
+		if(guidelines!=null)
+			for (abstractGuideline abstractGuideline : guidelines) {
+				if(abstractGuideline.getElements()!=null)
+					Elements.addAll(abstractGuideline.getElements());
+			}
+		return Elements;
+	}
+
 	public String getXml() {
 
 		JAXBContext jaxbCtx;
@@ -84,11 +90,11 @@ public class DataAnalysis implements Serializable{
 	}
 
 	public String getUri(){
-		
+
 		return filename;
 		//return "/Users/isiu/Downloads/24485.bpmn";
 	}
-	
+
 	public String getData(){
 		String res = xmldata!=null ?  xmldata.replaceAll("\"","\\\\\"").replaceAll("\n", "").replaceAll("\r", "") : "";
 		return res;
