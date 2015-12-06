@@ -75,12 +75,14 @@
                      <br/>
                        <h:outputText   value="Suggestion: " style="font-weight: bold;"/>
                         <h:outputText   value="#{data.suggestion}"/>
-                         <c:if test="not empty data.elements">
-                        <c:forEach  items="#{data.elements}"
-			var="element" varStatus="statusele">
-                         <h:outputText  id="toEL_#{statusele.index}" value="Element ID: #{element.value} #{element.refprocessid}"/>
-                        </c:forEach>
-                        </c:if>
+                        <br/>
+                         <p:accordionPanel value="#{data.elements}" var="element" style="border: 1px solid #a8a8a8;" multiple="false"  >
+                         
+                        <p:tab title="Element Name: #{element.name}" titleStyle="background: #{data.color};">
+                         <h:outputText   value="Element ID: #{element.value} Process Ref: #{element.refprocessid}"/>
+                       
+                        </p:tab>
+                        </p:accordionPanel> 
                    </p:tab>
     </p:accordionPanel> 
             <!--   </ace:accordionPane>

@@ -8,6 +8,9 @@ public class ElementID {
 	@XmlAttribute(name = "refProcessID")
     private String refprocessid;
 
+	@XmlAttribute(name = "refName")
+    private String name;
+
     @XmlValue
     private String value;
     
@@ -16,9 +19,9 @@ public class ElementID {
     }
     
 
-	public ElementID( String value, String refprocessid) {
+	public ElementID( String value, String refprocessid, String name) {
 		
-		
+		this.name= name;
 		this.value = value;
 		this.refprocessid  = refprocessid;
 	}
@@ -33,6 +36,8 @@ public class ElementID {
 		return value;
 	}
 
-	
+	public String getName(){
+		return name;
+	}
     
 }
