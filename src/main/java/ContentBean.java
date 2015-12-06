@@ -1,7 +1,10 @@
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,7 +39,7 @@ public class ContentBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2574895928017048791L;
-	
+
 	private int id;
 	private String Content;
 	private String restid;
@@ -51,7 +54,7 @@ public class ContentBean implements Serializable{
 
 	}
 
-	
+
 
 
 
@@ -71,7 +74,7 @@ public class ContentBean implements Serializable{
 
 
 
-	
+
 
 
 	public String getFilename() {
@@ -83,7 +86,7 @@ public class ContentBean implements Serializable{
 
 
 
-	
+
 
 
 
@@ -121,7 +124,7 @@ public class ContentBean implements Serializable{
 	public void setContent(String content) {
 		Content = content;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -156,10 +159,49 @@ public class ContentBean implements Serializable{
 		}
 
 	}
+	
+	public void damExample(ActionEvent event) {
+		test("24485.bpmn");
+	}
+	public void sevenExample(ActionEvent event) {
+		test("test7.bpmn");
+	}
+	public void sixExample(ActionEvent event) {
+		test("test8.bpmn");
+	}
+	
+	public void pizzaExample(ActionEvent event) {
+		test("pizza.bpmn");
+	}
+
+
+	private void test(String name) {
+		try {
+			String sep = File.separator;
+			URL is = ContentBean.class.getClassLoader().getResource("test"+sep+name);
+			Path path = Paths.get(is.toURI());
+
+			filecontent = 	new String(Files.readAllBytes(path), "UTF8");
+
+			filename = path.toFile().toString();// fileInfo.getFileName();
+			send();
+		} catch (IOException | URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+
 
 
 
 	public void submitButton(ActionEvent event) {
+		send();
+	}
+
+	public void send(){
 		if(filecontent!=null){
 
 			Client client = ClientBuilder.newClient();
@@ -180,20 +222,20 @@ public class ContentBean implements Serializable{
 			this.setRestid(id);
 
 			System.out.println("Submit Clicked: " + Content + ", " + id + "; ");
-			
-			
+
+
 			target = client.target("http://localhost:8080").path("verification-component-understandability-plugin/validatemodel/"+id+"/status");
 			String 	status ="";
 			while (!status.equals("OK")) {
-				
-			
-			status = target.request().get(String.class);
-			
+
+
+				status = target.request().get(String.class);
+
 				this.setStatus(status);
 			}
 			System.out.println("Status: "+status);
-			
-			
+
+
 			target = client.target("http://localhost:8080").path("verification-component-understandability-plugin/validatemodel/"+id);
 			Response response2 =  target.request().get();
 
@@ -201,20 +243,20 @@ public class ContentBean implements Serializable{
 			this.setGuidelinesfactory(glres);
 			// context = FacesContext.getCurrentInstance();
 			//context.getExternalContext().getRequestMap().put("guidelinefactory", glres);
-			
+
 			//GuidelinesFactory res = context.
 			//getApplication().
 			//evaluateExpressionGet(context, "#{ContentAnalysis.guidelinefactory}", GuidelinesFactory.class);
 
-			
-			
+
+
 			//System.out.println("Guideline: "+this.getGuidelinesfactory());
 			//this.setCollectionannotatedcontent(
 			//annotatecontent.readEntity(
 			//new GenericType<Collection<AnnotatedCollaborativeContentAnalysis>>() {}));
 
-			
-			
+
+
 		}
 	}
 }

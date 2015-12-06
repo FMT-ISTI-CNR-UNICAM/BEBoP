@@ -44,19 +44,40 @@
 	</h:form>
 
 	<br />
-
-	<h:panelGrid columns="2" border="1">
+<h:form>
+	<h:panelGrid columns="2" border="0">
 		<f:facet name="header">
-			Content Information
+			Examples
 		</f:facet>
-		<h:outputLabel for="contentout" value="Content:" />
-		<h:outputText id="contentout" value="#{ContentBean.content}" />
+		<h:outputLabel for="pizzaexample" value="PizzaExample" />
+		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
+			actionListener="#{ContentBean.pizzaExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
+   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
+    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
 
-		<h:outputLabel for="restOut" value="REstID:" />
-		<h:outputText id="restOut" value="#{ContentBean.restid}">
-			<f:param name="rest" value="#{ContentBean.restid}" />
-		</h:outputText>
+
+<h:outputLabel for="dam5example" value="Test Daminano Example" />
+		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
+			actionListener="#{ContentBean.damExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
+   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
+    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
+
+
+<h:outputLabel for="seven5example" value="Test 1 Example" />
+		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
+			actionListener="#{ContentBean.sevenExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
+   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
+    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
+
+
+<h:outputLabel for="six5example" value="Test 2 Example" />
+		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
+			actionListener="#{ContentBean.sixExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
+   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
+    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
+
 
 	</h:panelGrid>
+	</h:form>
 </h:body>
 </html>
