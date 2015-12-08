@@ -106,6 +106,25 @@ a:link {
       width: 50px;
       text-align: center;
     }
-.highlight:not(.djs-connection) .djs-visual > :nth-child(1) {
-  fill: red !important; /* color elements as green */
+.highlight .djs-visual > :nth-child(1) {
+  
+   stroke-opacity: 1; 
+  stroke: red;
+    stroke-width: 2px;
+    /* color elements as green :not(.djs-connection) .djs-visual > :nth-child(1) 
+    fill: red !important; 
+  border-color: red;
+  border-style: stroke: red; 
+  stroke-width: 4px;*/
 }
+
+/* .highlight:not(.djs-connection)  .djs-visual > :nth-child(1) {
+  fill: blue !important; 
+    color elements as green :not(.djs-connection) .djs-visual > :nth-child(1) 
+    fill: red !important; 
+  border-color: red;
+  border-style: stroke: red; 
+  stroke-width: 4px;
+} */
+
+
