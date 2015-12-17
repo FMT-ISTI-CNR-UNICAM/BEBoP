@@ -33,6 +33,9 @@ import eu.learnpad.verification.plugin.bpmn.guideline.impl.MinimizeGatewayHetero
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.MinimizeModelSize;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.ModelLoops;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.abstractGuideline;
+import eu.learnpad.verification.plugin.bpmn.guideline.impl.appearence.LinearMessageFlows;
+import eu.learnpad.verification.plugin.bpmn.guideline.impl.appearence.LinearSequenceFlows;
+import eu.learnpad.verification.plugin.bpmn.guideline.impl.appearence.ProcessOrientation;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.labeling.LabelingANDGateways;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.labeling.LabelingActivities;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.labeling.LabelingConvergingGateways;
@@ -52,6 +55,7 @@ import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.Consist
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.ExplicitStartEndEvents;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.RestrictUsageTerminateEndEvent;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.SplitAndJoinFlows;
+import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.UsageDefaultFlows;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.UsageInclusiveORGateways;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.UsageMeaningfulGateways;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.explicitGateways;
@@ -114,6 +118,7 @@ public class GuidelinesFactory {
 		guidelines.add(new BalanceGateways(diagram));	
 		guidelines.add(new UsageMeaningfulGateways(diagram));
 		guidelines.add(new UsageInclusiveORGateways(diagram));
+		guidelines.add(new UsageDefaultFlows(diagram));
 		//** Labeling 
 		guidelines.add(new LabelingPools(diagram));
 		guidelines.add(new LabelingLanes(diagram));
@@ -126,6 +131,11 @@ public class GuidelinesFactory {
 		guidelines.add(new LabelingConvergingGateways(diagram));
 		guidelines.add(new LabelingDataObject(diagram));
 		guidelines.add(new LoopMarkerAnnotation(diagram));
+		//** Appearence 
+		guidelines.add(new LinearSequenceFlows(diagram));
+		guidelines.add(new LinearMessageFlows(diagram));
+		guidelines.add(new ProcessOrientation(diagram));
+		//guidelines.add(new (diagram));
 		//guidelines.add(new (diagram));
 		//guidelines.add(new (diagram));
 		threadPool = new LinkedBlockingQueue<Runnable>();
