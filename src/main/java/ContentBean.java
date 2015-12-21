@@ -9,10 +9,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -46,17 +48,31 @@ public class ContentBean implements Serializable{
 	private String filecontent;
 	private String filename;
 	private String status;
+	private String Language;
 	private GuidelinesFactory guidelinesfactory;
 
 
 
 	public ContentBean(){
-
+		
 	}
 
+	@PostConstruct
+    public void initialize() {
 
+    }
 
+	public void changeLanguage(ValueChangeEvent e) {
+		this.Language = e.toString();
+	}
+	
+	public String getLanguage() {
+		return this.Language ;
+	}
 
+	public void setLanguage(String l) {
+		this.Language = l;
+	}
 
 
 	public GuidelinesFactory getGuidelinesfactory() {
@@ -159,7 +175,7 @@ public class ContentBean implements Serializable{
 		}
 
 	}
-	
+
 	public void damExample(ActionEvent event) {
 		test("24485.bpmn");
 	}
@@ -169,7 +185,7 @@ public class ContentBean implements Serializable{
 	public void sixExample(ActionEvent event) {
 		test("test8.bpmn");
 	}
-	
+
 	public void pizzaExample(ActionEvent event) {
 		test("pizza.bpmn");
 	}
@@ -189,7 +205,7 @@ public class ContentBean implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 
@@ -205,7 +221,13 @@ public class ContentBean implements Serializable{
 		if(filecontent!=null){
 
 			Client client = ClientBuilder.newClient();
-			WebTarget target = client.target("http://localhost:8080").path("verification-component-understandability-plugin/validatemodel/put");
+			String lang = "en";
+			if(Language!=null){
+				if( Language.equals("Italian")){
+					lang = "it";
+				}
+			}
+			WebTarget target = client.target("http://localhost:8080").path("verification-component-understandability-plugin/validatemodel/put").queryParam("lang", lang);
 
 
 			Entity<String> entity = Entity.entity(filecontent,MediaType.TEXT_PLAIN);

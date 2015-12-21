@@ -18,6 +18,15 @@
                                        sessionExpiredLabel="Session expired" />
 	<h:form>
 		<h:panelGrid columns="3" border="0">
+		
+		<h:outputLabel for="language" value="Language:" />
+			<h:selectOneMenu id="language" value="#{ContentBean.language}"  required="true">
+				<f:selectItem itemValue="English" />
+				<f:selectItem itemValue="Italian" />
+				
+			</h:selectOneMenu>
+			<h:message for="language" />
+			
 			<h:outputLabel for="inputfile" value="Input BPMN File:" />
 			<ace:fileEntry id="inputfile"  required="true"
 				fileEntryListener="#{ContentBean.sampleListener}" immediate="true"
