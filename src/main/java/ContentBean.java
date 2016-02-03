@@ -186,6 +186,10 @@ public class ContentBean implements Serializable{
 		test("test8.bpmn");
 	}
 
+	public void EPBRExample(ActionEvent event) {
+		test("EPBRBusinessProcess.bpmn");
+	}
+	
 	public void pizzaExample(ActionEvent event) {
 		test("pizza.bpmn");
 	}
