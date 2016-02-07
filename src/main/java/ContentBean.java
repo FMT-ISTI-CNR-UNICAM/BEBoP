@@ -8,6 +8,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -97,6 +99,9 @@ public class ContentBean implements Serializable{
 		return filename;
 	}
 
+	public void setName(String name) {
+		 filename = name;
+	}
 
 
 
@@ -176,29 +181,56 @@ public class ContentBean implements Serializable{
 
 	}
 
-	public void damExample(ActionEvent event) {
-		test("24485.bpmn");
-	}
-	public void sevenExample(ActionEvent event) {
-		test("test7.bpmn");
-	}
-	public void sixExample(ActionEvent event) {
-		test("test8.bpmn");
-	}
-
-	public void EPBRExample(ActionEvent event) {
-		test("EPBRBusinessProcess.bpmn");
+	
+	
+	
+	public void GENExample(String name) {
+		
+		test(name);
 	}
 	
-	public void pizzaExample(ActionEvent event) {
-		test("pizza.bpmn");
-	}
 
+
+	public List<String> getAllResouce(){
+		String sep = File.separator;
+		List<String> resourcesDir = new ArrayList<String>();
+		resourcesDir.add("test"+sep);
+		resourcesDir.add("model"+sep);
+		List<String> files = new ArrayList<String>();
+		try {
+		
+			
+			for(String resourceDir: resourcesDir){
+			URL url = ContentBean.class.getResource(resourceDir);
+			if (url == null) {
+			     // error - missing folder
+			} else {
+			    File dir = new File(url.toURI());
+			    for (File nextFile : dir.listFiles()) {
+			        // Do something with nextFile
+			    	files.add(resourceDir+nextFile.getName());
+			    }
+			}
+			}
+		
+			return files;
+		} catch ( URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		/*for(String f : files){
+		  String data= IOUtils.toString(Thread.currentThread().getClass().getClassLoader().getResourceAsStream(resourceDir + f));
+		  ....process data
+		}*/
+		
+		return null;
+	}
 
 	private void test(String name) {
 		try {
-			String sep = File.separator;
-			URL is = ContentBean.class.getClassLoader().getResource("test"+sep+name);
+			
+			URL is = ContentBean.class.getClassLoader().getResource(name);
 			Path path = Paths.get(is.toURI());
 
 			filecontent = 	new String(Files.readAllBytes(path), "UTF8");

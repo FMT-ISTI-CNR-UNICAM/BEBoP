@@ -7,7 +7,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ace="http://www.icefaces.org/icefaces/components"
-	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<title>Single Submit - Form</title>
 </h:head>
@@ -58,39 +59,19 @@
 		<f:facet name="header">
 			Examples
 		</f:facet>
-		<h:outputLabel for="pizzaexample" value="PizzaExample" />
-		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
-			actionListener="#{ContentBean.pizzaExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
+		
+<c:forEach items="#{ContentBean.allResouce}" var="item" varStatus="status">
+	<h:outputLabel  value="#{item}" />
+	
+	<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
+			actionListener="#{ContentBean.GENExample(item)}" > 
+	
+	<f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
    <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
     <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
+	
 
-
-<h:outputLabel for="dam5example" value="Test Daminano Example" />
-		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
-			actionListener="#{ContentBean.damExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
-   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
-    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
-
-
-<h:outputLabel for="seven5example" value="Test 1 Example" />
-		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
-			actionListener="#{ContentBean.sevenExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
-   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
-    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
-
-
-<h:outputLabel for="six5example" value="Test 2 Example" />
-		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
-			actionListener="#{ContentBean.sixExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
-   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
-    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
-
-
-<h:outputLabel for="EPBR5example" value="EPBR Business Process Example" />
-		<h:commandButton  value="Submit" action="#{pageController.navigatePageGetAnalysis}"
-			actionListener="#{ContentBean.EPBRExample}" > <f:setPropertyActionListener target="#{DataAnalysis.guidelinesfactory}"  value="#{ContentBean.guidelinesfactory}" />
-   <f:setPropertyActionListener target="#{DataAnalysis.filename}"  value="#{ContentBean.filename}" />
-    <f:setPropertyActionListener target="#{DataAnalysis.xmldata}"  value="#{ContentBean.filecontent}" /></h:commandButton>
+</c:forEach>
 
 
 	</h:panelGrid>
