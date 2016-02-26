@@ -70,8 +70,11 @@
 		<!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
 	
 	<h:panelGrid columns="2" border="1"  cellspacing="1" >
+	<f:facet name="header" >
+		<h:outputText value="Understandabily BPMN Analysis Result " style="font-weight: bold;font-size:20px" />	
+		</f:facet>
 		<p:accordionPanel value="#{DataAnalysis.guidelines}" var="data"
-			style="border: 1px solid #a8a8a8; width: 550px;" multiple="false">
+			style="border: 1px solid #a8a8a8; width: 450px;" multiple="false">
 			<p:tab title="GuideLane ID: #{data.id} - #{data.name}"
 				titleStyle="background: #{data.color};">
 				<h:outputText value="Description: " style="font-weight: bold;" />
