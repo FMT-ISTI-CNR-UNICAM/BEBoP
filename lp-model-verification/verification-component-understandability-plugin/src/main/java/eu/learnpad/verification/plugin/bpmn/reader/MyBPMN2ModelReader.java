@@ -3,9 +3,13 @@ package eu.learnpad.verification.plugin.bpmn.reader;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
+
+
 
 
 import org.eclipse.bpmn2.Definitions;
@@ -45,7 +49,7 @@ public class MyBPMN2ModelReader {
         File temp = File.createTempFile("tempfile", ".tmp"); 
         temp.deleteOnExit();
         //write it
-        BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(temp), "UTF-8"));
         bw.write(theBPMNString);
         bw.close();
 
@@ -56,7 +60,7 @@ public class MyBPMN2ModelReader {
 
     }
 
-    public Definitions readURIModel(URI uri) throws IOException{
+    public Definitions readURIModel(URI uri) {
 
 
 
@@ -72,7 +76,7 @@ public class MyBPMN2ModelReader {
         try{
             // Load the resource
             resource.load(options);
-        }catch(IOWrappedException e){
+        }catch( IOException e){
         
 
             log.error("\nModel involved in the exception:\n"+uri.toString()+" "+e.getMessage());
