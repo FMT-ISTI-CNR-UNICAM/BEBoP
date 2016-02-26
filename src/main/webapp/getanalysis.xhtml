@@ -68,8 +68,10 @@
             <c:forEach items="#{DataAnalysis.guidelines}"
 			var="data" varStatus="status">-->
 		<!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
+	
+	<h:panelGrid columns="2" border="1"  cellspacing="1" >
 		<p:accordionPanel value="#{DataAnalysis.guidelines}" var="data"
-			style="border: 1px solid #a8a8a8;" multiple="false">
+			style="border: 1px solid #a8a8a8; width: 550px;" multiple="false">
 			<p:tab title="GuideLane ID: #{data.id} - #{data.name}"
 				titleStyle="background: #{data.color};">
 				<h:outputText value="Description: " style="font-weight: bold;" />
@@ -94,15 +96,18 @@
 		<!--   </ace:accordionPane>
                 </c:forEach>-->
 		<!-- </ace:accordion>-->
+		
+		<div class="content" id="js-drop-zone" style="width: 1050px;height:805px;">
+		<div id="diagramCanvas"/>
+	</div>
+	
 
-
+</h:panelGrid>
 	</h:form>
 
 
-	<div class="content" id="js-drop-zone">
-		<div id="diagramCanvas"></div>
-	</div>
-	<h:outputScript>	
+	
+<h:outputScript>	
 		var data =' #{DataAnalysis.data}';
 		
 		if(data!=null){
@@ -178,7 +183,6 @@
 		
 		
 	</h:outputScript>
-
 
 
 
