@@ -59,22 +59,31 @@
 
 
 
-
 		<br />
 
-
+	
 		<!--    <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">
            
             <c:forEach items="#{DataAnalysis.guidelines}"
 			var="data" varStatus="status">-->
 		<!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
 	
-	<h:panelGrid columns="2" border="1"  cellspacing="1" >
+	<p:panelGrid  border="1"  cellspacing="1" style="width: 100%;">
 	<f:facet name="header" >
+	 <p:row>
+	 <p:column colspan="2">
 		<h:outputText value="Understandabily BPMN Analysis Result " style="font-weight: bold;font-size:20px" />	
+		<br/>
+		<h:outputText  value="Guidelines respected " />
+			<h:outputText  value="#{DataAnalysis.statistics}" style="font-weight: bold; background-color: #{DataAnalysis.color};" />
+		</p:column>
+		</p:row>
 		</f:facet>
+		<p:row>
+		
+		<p:column rowspan="1" style="width: 37%;">
 		<p:accordionPanel value="#{DataAnalysis.guidelines}" var="data"
-			style="border: 1px solid #a8a8a8; width: 450px;" multiple="false">
+			style="border: 1px solid #a8a8a8;" multiple="false">
 			<p:tab title="GuideLane ID: #{data.id} - #{data.name}"
 				titleStyle="background: #{data.color};">
 				<h:outputText value="Description: " style="font-weight: bold;" />
@@ -96,16 +105,17 @@
 				</p:accordionPanel>
 			</p:tab>
 		</p:accordionPanel>
+		</p:column>
 		<!--   </ace:accordionPane>
                 </c:forEach>-->
 		<!-- </ace:accordion>-->
-		
-		<div class="content" id="js-drop-zone" style="width: 1050px;height:805px;">
+		<p:column rowspan="1">
+		<div class="content" id="js-drop-zone" style="height:805px;">
 		<div id="diagramCanvas"/>
 	</div>
-	
-
-</h:panelGrid>
+	</p:column>
+</p:row>
+</p:panelGrid>
 	</h:form>
 
 

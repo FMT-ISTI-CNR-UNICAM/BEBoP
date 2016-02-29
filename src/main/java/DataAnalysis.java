@@ -26,6 +26,7 @@ public class DataAnalysis implements Serializable{
 	private GuidelinesFactory guidelinesfactory;
 	private String filename;
 	private String xmldata;
+	private int tot,good = 0;
 
 	public DataAnalysis(){
 
@@ -53,6 +54,23 @@ public class DataAnalysis implements Serializable{
 			return this.guidelinesfactory.getGuidelines();
 		else
 			return null;
+	}
+	
+	public String getStatistics(){
+		String result = "%s/%s";
+		if(this.guidelinesfactory!=null){
+			 Collection<abstractGuideline> gl = this.guidelinesfactory.getGuidelines();
+			 good = 0;
+			 tot = gl.size();
+			 for (abstractGuideline abstractGuideline : gl) {
+				if(abstractGuideline.getSuggestion().equals("Well done!")){
+					good++;
+				}
+			}
+			 return String.format(result, good, tot);
+		}else
+			return null;
+		
 	}
 
 	public Collection<ElementID>  getElements(){
@@ -100,6 +118,25 @@ public class DataAnalysis implements Serializable{
 		return res;
 	}
 
+	public String getColor(){
+		String color ="";
+		if(tot>0){
+		int m = (good*100/tot);
+			if(m<=25){
+				color ="#FF0000"; //$NON-NLS-1$
+			}else if(m<=50){
+				color ="#FFFF00";//$NON-NLS-1$
+			}else if(m<=75){
+				color ="#00FF00"; //$NON-NLS-1$
+			}else if(m<100){
+				color ="#00FF00";//$NON-NLS-1$
+			}else if(m==100){
+				color ="#00FF7F"; //$NON-NLS-1$
+			}
+		}
+		return color;
+	}
+	
 	/*public void setXml(String xml) {
 		this.xml = xml;
 	}
