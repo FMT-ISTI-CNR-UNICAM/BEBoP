@@ -19,7 +19,10 @@
                                        sessionExpiredLabel="Session expired" />
 	<h:form>
 		<h:panelGrid columns="3" border="0">
+		<f:facet name="header">
+		<h:outputText value="User Interface for Guidelines verification component"/>
 		
+		</f:facet>
 		<h:outputLabel for="language" value="Language:" />
 			<h:selectOneMenu id="language" value="#{ContentBean.language}"  required="true">
 				<f:selectItem itemValue="English" />
@@ -76,5 +79,28 @@
 
 	</h:panelGrid>
 	</h:form>
+	<br/>
+
+<p>*This work has been partially founded by <a href="http://www.learnpad.eu" target="_blank">EU project LearnPAd</a>  (GA:619583).</p>
+
+<br/>
+<br/>
+<div style="width: 600px;">
+<p align="center">
+ <a href="http://www.fmt.isti.cnr.it" target="_blank">Formal Methods &amp; Tools Group</a><br/>
+<a href="http://www.isti.cnr.it" target="_blank">Institute of information science and technologies "Alessandro Faedo"</a><br/>  
+<a href="http://www.cnr.it" target="_blank"><img  src="/images/Logo_CNR-2010-ENG-high.png" style="height: 80;" /></a>
+</p>
+</div>
+<br/>
+<br/>
+
+<div style="width: 300px;">
+<p align="center">
+<a href="http://www.cs.unicam.it/" target="_blank">Computer Science Division</a><br/>
+<a href="http://www.cs.unicam.it/" target="_blank">University of Camerino</a><br/>
+<a href="http://www.unicam.it" target="_blank"><img  src="/images/Logo_unicam.png" style="height: 75; "  /></a><br/>
+</p>
+</div>
 </h:body>
 </html>
