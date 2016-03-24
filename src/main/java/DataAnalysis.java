@@ -123,15 +123,15 @@ public class DataAnalysis implements Serializable{
 		if(tot>0){
 		int m = (good*100/tot);
 			if(m<=25){
-				color ="#FF0000"; //$NON-NLS-1$
+				color ="#ff9a9a"; //$NON-NLS-1$
 			}else if(m<=50){
-				color ="#FFFF00";//$NON-NLS-1$
+				color ="#80ff80";//$NON-NLS-1$
 			}else if(m<=75){
-				color ="#00FF00"; //$NON-NLS-1$
+				color ="#80ff80"; //$NON-NLS-1$
 			}else if(m<100){
 				color ="#00FF00";//$NON-NLS-1$
 			}else if(m==100){
-				color ="#00FF7F"; //$NON-NLS-1$
+				color ="#4dffa5"; //$NON-NLS-1$
 			}
 		}
 		return color;
