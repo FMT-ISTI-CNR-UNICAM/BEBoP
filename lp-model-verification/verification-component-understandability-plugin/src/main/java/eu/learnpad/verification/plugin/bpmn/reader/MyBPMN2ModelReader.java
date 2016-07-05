@@ -49,7 +49,9 @@ public class MyBPMN2ModelReader {
         File temp = File.createTempFile("tempfile", ".tmp"); 
         temp.deleteOnExit();
         //write it
+
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(temp), "UTF-8"));
+
         bw.write(theBPMNString);
         bw.close();
 
