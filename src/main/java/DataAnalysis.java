@@ -131,7 +131,7 @@ public class DataAnalysis implements Serializable{
 			}else if(m<100){
 				color ="#00FF00";//$NON-NLS-1$
 			}else if(m==100){
-				color ="#4dffa5"; //$NON-NLS-1$
+				color ="rgba(71, 209, 71, 0.5)"; //$NON-NLS-1$
 			}
 		}
 		return color;

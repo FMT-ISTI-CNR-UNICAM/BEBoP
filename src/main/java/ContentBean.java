@@ -52,6 +52,7 @@ public class ContentBean implements Serializable{
 	private String status;
 	private String Language;
 	private GuidelinesFactory guidelinesfactory;
+	private String example;
 
 
 
@@ -63,6 +64,14 @@ public class ContentBean implements Serializable{
     public void initialize() {
 
     }
+
+	public String getExample() {
+		return example;
+	}
+
+	public void setExample(String example) {
+		this.example = example;
+	}
 
 	public void changeLanguage(ValueChangeEvent e) {
 		this.Language = e.toString();

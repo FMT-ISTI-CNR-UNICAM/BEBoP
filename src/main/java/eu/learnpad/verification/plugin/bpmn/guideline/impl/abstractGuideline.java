@@ -139,9 +139,9 @@ public  class abstractGuideline  {
 	}
 	
 	public String getColor(){
-		String color = "#47d147";// "green"; //"#FF0000";
+		String color = "rgba(71, 209, 71, 0.63)";// "green"; //"#FF0000";
 		if(!(this.getSuggestion().equals("Well done!") | this.getSuggestion().equals("Ben Fatto!"))){
-			color = " #cc2900";//"red";//"#00FF7F";
+			color =  "rgba(204, 41, 0, 0.7)";//"red";//"#00FF7F";
 		}
 		return color;
 	}
