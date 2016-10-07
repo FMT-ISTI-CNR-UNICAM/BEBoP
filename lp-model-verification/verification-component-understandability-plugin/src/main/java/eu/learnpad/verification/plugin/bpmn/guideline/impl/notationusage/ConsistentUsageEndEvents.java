@@ -74,18 +74,18 @@ public class ConsistentUsageEndEvents extends abstractGuideline{
 						String name = e.getName();
 						if(name==null)
 							 name = getName(e);
-						//if(name!=null)
+						
 						for( FlowElement ee :elementsBPMNtemp){
 							if(!ee.equals(e)){
 								String  namee = ee.getName();
 								if(namee==null)
 									 namee = getName(ee);
-								if(namee!=null){
+								if(namee!=null & name!=null) {
 								if(name.equals(namee)){
 									flags = true;
 								}
 								}else{
-									if(namee==name){
+									if(name==namee){
 										flags=true;
 									}
 								}
