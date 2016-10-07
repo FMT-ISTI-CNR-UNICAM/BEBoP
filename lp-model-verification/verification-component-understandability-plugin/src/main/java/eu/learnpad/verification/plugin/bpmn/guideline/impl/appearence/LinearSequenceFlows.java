@@ -56,7 +56,9 @@ public class LinearSequenceFlows extends abstractGuideline{
 
 						//boolean flagprocess = sf.getSourceRef().eContainer() == sf.getTargetRef().eContainer();
 						boolean flaglane =false;
+						if(sf.getSourceRef()!=null)
 						if(sf.getSourceRef().getLanes()!=null)
+							if(sf.getTargetRef()!=null)
 							if(sf.getTargetRef().getLanes()!=null)
 								if(!sf.getSourceRef().getLanes().isEmpty())
 									if(!sf.getTargetRef().getLanes().isEmpty())

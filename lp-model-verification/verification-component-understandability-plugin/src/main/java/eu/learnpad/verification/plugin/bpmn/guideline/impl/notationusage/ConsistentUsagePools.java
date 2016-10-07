@@ -49,6 +49,8 @@ public class ConsistentUsagePools extends abstractGuideline{
 				List<Participant> partecipants = collaboration.getParticipants();
 				for (Participant participant : partecipants) {
 					participant.getId();
+					if(participant.getProcessRef()==null)
+						continue;
 					IDProcess = participant.getProcessRef().getId();
 					BPMNShape shape= BPMNUtils.findBPMNShape(diagram,participant);
 					if(shape!=null)

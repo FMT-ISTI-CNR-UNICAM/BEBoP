@@ -47,6 +47,8 @@ public class LabelingPools extends abstractGuideline{
 				List<Participant> partecipants = collaboration.getParticipants();
 				for (Participant participant : partecipants) {
 					participant.getId();
+					if(participant.getProcessRef()==null)
+						continue;
 					IDProcess = participant.getProcessRef().getId();
 					if(participant.getName()==null){
 						num++;
