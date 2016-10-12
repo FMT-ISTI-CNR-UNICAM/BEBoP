@@ -26,7 +26,7 @@ public class GuidelinesFactoryTest {
 
 	@Test
 	public void testGuidelinesFactoryListOfRootElement() {
-		genarateTestforFile("lanes.bpmn","11");
+		/*genarateTestforFile("lanes.bpmn","11");
 		genarateTestforFile("lanes.bpmn","29");
 		genarateTestforFile("pizza.bpmn","16");
 		genarateTestforFile("24485.bpmn","16");
@@ -48,9 +48,9 @@ public class GuidelinesFactoryTest {
 		genarateTestforFile("ConvergingGateways.bpmn","35");
 		genarateTestforFile("ConvergingGateways.bpmn","36");
 		genarateTestforFile("ConvergingGateways.bpmn","37");
-		genarateTestforFile("LoopMarkerAnnotation.bpmn","39");
+		genarateTestforFile("LoopMarkerAnnotation.bpmn","39");*/
 		String sep = File.separator;
-		genarateTestforFile("journal"+sep+"EsempioFig1_1.bpmn","17");
+		genarateTestforFile("journal"+sep+"Example_Fig1.bpmn","14");
 
 	}
 
@@ -219,18 +219,18 @@ public class GuidelinesFactoryTest {
 	public void testGuidelinesFactoryListGood() {
 		List<String> ldirectory = new ArrayList<String>();
 		String sep = File.separator;
-		ldirectory.add("EPBR-Coordinator"+sep+"20903.bpmn");
+	//	ldirectory.add("EPBR-Coordinator"+sep+"20903.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21099.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21203.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21385.bpmn");
-		ldirectory.add("EPBR-Coordinator"+sep+"21417.bpmn");
-		ldirectory.add("EPBR-Coordinator"+sep+"21823.bpmn");
+	//	ldirectory.add("EPBR-Coordinator"+sep+"21417.bpmn");
+	//	ldirectory.add("EPBR-Coordinator"+sep+"21823.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"diagram.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"20250.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"20386.bpmn");
-		ldirectory.add("TitoloUnico"+sep+"20461.bpmn");
+//		ldirectory.add("TitoloUnico"+sep+"20461.bpmn");
 		for(String filename: ldirectory){
-		genarateTestforFileOk2(filename);
+	//	genarateTestforFileOk2(filename);
 		}
 		
 	}
