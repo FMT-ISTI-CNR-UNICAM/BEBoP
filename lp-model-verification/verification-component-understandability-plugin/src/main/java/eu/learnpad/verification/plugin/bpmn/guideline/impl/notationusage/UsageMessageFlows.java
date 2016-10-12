@@ -93,7 +93,7 @@ public class UsageMessageFlows extends abstractGuideline{
 			List<MessageFlow> bPMNEdges) {
 		if(bPMNEdges!=null)
 		for (MessageFlow messflow : bPMNEdges) {
-			
+			if(messflow.getSourceRef() instanceof InteractionNodeImpl){
 			InteractionNodeImpl source = (InteractionNodeImpl) messflow.getSourceRef();
 			InteractionNodeImpl target = (InteractionNodeImpl) messflow.getTargetRef();
 				String fragments = source.eProxyURI().fragment();
@@ -102,6 +102,14 @@ public class UsageMessageFlows extends abstractGuideline{
 				if(aid.equals(fragmentt) || aid.equals(fragments)){
 					return true;
 				}
+			}else{
+				if(messflow.getSourceRef() instanceof Activity){
+					if(a.equals(messflow.getSourceRef()) || a.equals(messflow.getTargetRef())){
+						return true;
+					}
+				}
+			}
+				
 				
 			
 		}
