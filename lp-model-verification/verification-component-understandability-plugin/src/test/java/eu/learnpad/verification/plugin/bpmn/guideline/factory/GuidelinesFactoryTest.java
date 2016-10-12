@@ -5,7 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -91,8 +93,8 @@ public class GuidelinesFactoryTest {
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-			//OutputStream os = new FileOutputStream( "nosferatu"+ NameFile.substring(0, NameFile.length()-4)+".xml" );
-			//jaxbMarshaller.marshal( eg, os );
+			OutputStream os = new FileOutputStream( "nosferatu"+ NameFile.substring(0, NameFile.length()-19)+".xml" );
+			jaxbMarshaller.marshal( eg, os );
 
 			// jaxbMarshaller.marshal(eg, System.out);
 
@@ -203,7 +205,7 @@ public class GuidelinesFactoryTest {
 			//OutputStream os = new FileOutputStream( "nosferatuBB"+ NameFile.substring(0, NameFile.length()-4)+".xml" );
 			//jaxbMarshaller.marshal( eg, os );
 
-			//jaxbMarshaller.marshal(eg, System.out);
+			jaxbMarshaller.marshal(eg, System.out);
 			//assertTrue(eg.getStatus().equals("OK"));
 
 		} catch (JAXBException  | URISyntaxException  | IOException e ) {

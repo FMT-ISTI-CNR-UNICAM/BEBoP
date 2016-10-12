@@ -1,9 +1,14 @@
 package eu.learnpad.verification.plugin.bpmn.reader;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.Collaboration;
 import org.eclipse.bpmn2.Definitions;
+import org.eclipse.bpmn2.MessageFlow;
+import org.eclipse.bpmn2.RootElement;
 import org.eclipse.bpmn2.di.BPMNDiagram;
 import org.eclipse.bpmn2.di.BPMNEdge;
 import org.eclipse.bpmn2.di.BPMNShape;
@@ -90,6 +95,19 @@ public class BPMNUtils {
 			}
 		}
 		return colledge;
+	}
+
+
+	public static List<MessageFlow> getAllMessageFlow(
+			Definitions diagram) {
+		for (RootElement rootElement : diagram.getRootElements()) {
+			if (rootElement instanceof Collaboration) {
+				Collaboration collaboration = (Collaboration) rootElement;
+				return collaboration.getMessageFlows();
+				
+			}
+		}
+			return null;
 	}
 
 }
