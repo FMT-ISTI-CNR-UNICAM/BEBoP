@@ -91,6 +91,7 @@ public class UsageMessageFlows extends abstractGuideline{
 
 	private boolean searchMessageFlow(Activity a,
 			List<MessageFlow> bPMNEdges) {
+		if(bPMNEdges!=null)
 		for (MessageFlow messflow : bPMNEdges) {
 			
 			InteractionNodeImpl source = (InteractionNodeImpl) messflow.getSourceRef();
