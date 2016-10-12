@@ -203,7 +203,7 @@ public class ContentBean implements Serializable{
 	public List<String> getAllResouce(){
 		String sep = File.separator;
 		List<String> resourcesDir = new ArrayList<String>();
-		resourcesDir.add("journal"+sep);
+		resourcesDir.add("EPBR"+sep);
 		resourcesDir.add("test"+sep);
 		resourcesDir.add("model"+sep);
 		List<String> files = new ArrayList<String>();
