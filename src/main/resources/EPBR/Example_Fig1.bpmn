@@ -11,7 +11,7 @@
       <incoming>_15</incoming>
       <outgoing>_17</outgoing>
     </task>
-    <exclusiveGateway gatewayDirection="Diverging" id="_6" name="all accept the request?">
+    <exclusiveGateway gatewayDirection="Diverging" id="_6" name="req. accepted?">
       <incoming>_17</incoming>
       <outgoing>_18</outgoing>
       <outgoing>_23</outgoing>
