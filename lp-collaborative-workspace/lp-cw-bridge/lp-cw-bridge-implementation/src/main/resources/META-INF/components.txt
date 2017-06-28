@@ -1,2 +1,0 @@
-eu.learnpad.cw.CWXwikiBridge
-eu.learnpad.cw.UICWBridge
