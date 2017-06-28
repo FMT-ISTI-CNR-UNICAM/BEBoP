@@ -3,8 +3,10 @@ package eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.EndEvent;
@@ -37,14 +39,17 @@ public class ConsistentUsageEndEvents extends abstractGuideline{
 	@Override
 	protected void findGL(Definitions diagram) {
 		StringBuilder temp = new StringBuilder();
-		Collection<FlowElement> elementsBPMNtemp = new ArrayList<FlowElement>();
-		Collection<ElementID> Elementstemp = new ArrayList<ElementID>();
+		
+		Map<Process,Collection<FlowElement>> hashProcessFlow = new HashMap<Process, Collection<FlowElement>>();
+		List<ElementID> Elementstemp = new ArrayList<ElementID>();
 		boolean flag=false;
 	
 		
 		for (RootElement rootElement : diagram.getRootElements()) {
 			if (rootElement instanceof Process) {
+				Collection<FlowElement> elementsBPMNtemp = new ArrayList<FlowElement>();
 				Process process = (Process) rootElement;
+				hashProcessFlow.put(process, elementsBPMNtemp);
 				//System.out.format("Found a process: %s\n", process.getName());
 				int num = 0;
 				IDProcess = process.getId();
@@ -67,43 +72,49 @@ public class ConsistentUsageEndEvents extends abstractGuideline{
 							
 						} 
 				}
-				if(num>1){
+			}
+		}
+		ArrayList<FlowElement> elementsBPMNres = new ArrayList<FlowElement>();
+		Collection<ElementID> Elementsres = new ArrayList<ElementID>();
+		for(Collection<FlowElement> elementsBPMNtemp: hashProcessFlow.values()){
+				if(elementsBPMNtemp.size()>1){
 					Collection<FlowElement> removeBPMNtemps = new ArrayList<FlowElement>();
+					int z = 0;
 					for( FlowElement e :elementsBPMNtemp){
 						boolean flags = false;
 						String name = e.getName();
 						if(name==null)
 							 name = getName(e);
-						if(name!=null)
+						
 						for( FlowElement ee :elementsBPMNtemp){
 							if(!ee.equals(e)){
 								String  namee = ee.getName();
 								if(namee==null)
 									 namee = getName(ee);
-								if(namee!=null)
+								if(namee!=null & name!=null) {
 								if(name.equals(namee)){
 									flags = true;
 								}
+								}else{
+									if(name==namee){
+										flags=true;
+									}
+								}
+									
 							}
 							
 						}
-						if(!flags){
-							removeBPMNtemps.add(e);
+						if(flags){
+							elementsBPMNres.add(e);
+							Elementsres.add(Elementstemp.get(z));
 						}
+						z++;
 					}
-					elementsBPMNtemp.removeAll(removeBPMNtemps);
-					if(!elementsBPMNtemp.isEmpty()){
-					flag=true;
-					}
-				}else{
-					elementsBPMNtemp = new ArrayList<FlowElement>();
-					Elementstemp = new ArrayList<ElementID>();
 				}
-			}
 		}
-		if (flag) {
-			elementsBPMN.addAll(elementsBPMNtemp);
-			setAllElements(Elementstemp);
+		if (!elementsBPMNres.isEmpty()) {
+			elementsBPMN.addAll(elementsBPMNres);
+			setAllElements(Elementsres);
 			this.Suggestion += Messages.getString("ConsistentUsageEndEvents.SuggestionKO",l); //$NON-NLS-1$
 			this.status = false;
 		}else{

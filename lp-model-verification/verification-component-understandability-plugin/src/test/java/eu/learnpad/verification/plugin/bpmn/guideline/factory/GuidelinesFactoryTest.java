@@ -5,7 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -26,7 +28,7 @@ public class GuidelinesFactoryTest {
 
 	@Test
 	public void testGuidelinesFactoryListOfRootElement() {
-		genarateTestforFile("lanes.bpmn","11");
+		/*genarateTestforFile("lanes.bpmn","11");
 		genarateTestforFile("lanes.bpmn","29");
 		genarateTestforFile("pizza.bpmn","16");
 		genarateTestforFile("24485.bpmn","16");
@@ -48,9 +50,9 @@ public class GuidelinesFactoryTest {
 		genarateTestforFile("ConvergingGateways.bpmn","35");
 		genarateTestforFile("ConvergingGateways.bpmn","36");
 		genarateTestforFile("ConvergingGateways.bpmn","37");
-		genarateTestforFile("LoopMarkerAnnotation.bpmn","39");
+		genarateTestforFile("LoopMarkerAnnotation.bpmn","39");*/
 		String sep = File.separator;
-		genarateTestforFile("journal"+sep+"EsempioFig1_1.bpmn","17");
+		genarateTestforFile("journal"+sep+"Example_Fig1.bpmn","14");
 
 	}
 
@@ -91,8 +93,8 @@ public class GuidelinesFactoryTest {
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-			//OutputStream os = new FileOutputStream( "nosferatu"+ NameFile.substring(0, NameFile.length()-4)+".xml" );
-			//jaxbMarshaller.marshal( eg, os );
+			OutputStream os = new FileOutputStream( "nosferatu"+ NameFile.substring(0, NameFile.length()-19)+".xml" );
+			jaxbMarshaller.marshal( eg, os );
 
 			// jaxbMarshaller.marshal(eg, System.out);
 
@@ -203,7 +205,7 @@ public class GuidelinesFactoryTest {
 			//OutputStream os = new FileOutputStream( "nosferatuBB"+ NameFile.substring(0, NameFile.length()-4)+".xml" );
 			//jaxbMarshaller.marshal( eg, os );
 
-			//jaxbMarshaller.marshal(eg, System.out);
+			jaxbMarshaller.marshal(eg, System.out);
 			//assertTrue(eg.getStatus().equals("OK"));
 
 		} catch (JAXBException  | URISyntaxException  | IOException e ) {
@@ -219,18 +221,18 @@ public class GuidelinesFactoryTest {
 	public void testGuidelinesFactoryListGood() {
 		List<String> ldirectory = new ArrayList<String>();
 		String sep = File.separator;
-		ldirectory.add("EPBR-Coordinator"+sep+"20903.bpmn");
+	//	ldirectory.add("EPBR-Coordinator"+sep+"20903.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21099.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21203.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21385.bpmn");
-		ldirectory.add("EPBR-Coordinator"+sep+"21417.bpmn");
-		ldirectory.add("EPBR-Coordinator"+sep+"21823.bpmn");
+	//	ldirectory.add("EPBR-Coordinator"+sep+"21417.bpmn");
+	//	ldirectory.add("EPBR-Coordinator"+sep+"21823.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"diagram.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"20250.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"20386.bpmn");
-		ldirectory.add("TitoloUnico"+sep+"20461.bpmn");
+//		ldirectory.add("TitoloUnico"+sep+"20461.bpmn");
 		for(String filename: ldirectory){
-		genarateTestforFileOk2(filename);
+	//	genarateTestforFileOk2(filename);
 		}
 		
 	}

@@ -52,6 +52,7 @@ import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.SplitAn
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.UsageDefaultFlows;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.UsageInclusiveORGateways;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.UsageMeaningfulGateways;
+import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.UsageMessageFlows;
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.notationusage.explicitGateways;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -126,6 +127,7 @@ public class GuidelinesFactory {
 		guidelines.add(new UsageMeaningfulGateways(diagram,l));
 		guidelines.add(new UsageInclusiveORGateways(diagram,l));
 		guidelines.add(new UsageDefaultFlows(diagram,l));
+		guidelines.add(new UsageMessageFlows(diagram,l));
 		//** Labeling 
 		guidelines.add(new LabelingPools(diagram,l));
 		guidelines.add(new LabelingLanes(diagram,l));
@@ -140,7 +142,7 @@ public class GuidelinesFactory {
 		guidelines.add(new LoopMarkerAnnotation(diagram,l));
 		//** Appearence 
 		guidelines.add(new LinearSequenceFlows(diagram,l));
-	//	guidelines.add(new LinearMessageFlows(diagram,l));
+		guidelines.add(new LinearMessageFlows(diagram,l));
 		guidelines.add(new ProcessOrientation(diagram,l));
 		//guidelines.add(new (diagram,l));
 		//guidelines.add(new (diagram,l));
