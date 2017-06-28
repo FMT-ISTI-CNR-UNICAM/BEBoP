@@ -1,10 +1,65 @@
-* *Builds* [![Build
-Status](https://travis-ci.org/LearnPAd/learnpad.svg?branch=master)](https://travis-ci.org/LearnPAd/learnpad)
-* *Coverage* [![Coveralls](https://coveralls.io/repos/LearnPAd/learnpad/badge.svg)](https://coveralls.io/r/LearnPAd/learnpad)
-* *Quality (only Javascript)* [![Code
-Climate](https://codeclimate.com/github/LearnPAd/learnpad/badges/gpa.svg)](https://codeclimate.com/github/LearnPAd/learnpad)
-[![Codacy
-Badge](https://www.codacy.com/project/badge/614d864cf4d44c5ba52b5df40f9812c6)](https://www.codacy.com/app/woshilapin/learnpad)
+* *Builds* [![Build Status](https://travis-ci.org/FMT-ISTI-CNR-UNICAM/BEBoP.svg?branch=master)](https://travis-ci.org/FMT-ISTI-CNR-UNICAM/BEBoP)
+
+Verification understandability component plugin
+====================
+
+Information   | Value
+------------- | --------
+Component     | Verification Understandability Plugin
+Partner       | Unicam, ISTI-CNR
+WP            | 4
+Responsible   | Andrea Polini <andrea.polini@unicam.it>
+Collaborators | Giorgio Spagnolo [spagnolo at isti.cnr.it],  Damiano Falcioni <damiano.falcioni@unicam.it> 
+Roadmap       | http://wiki.learnpad.eu/LearnPAdWiki/bin/view/Component/Model+Verification
+
+# Summary
+This component is a plugin for the verification component that provide understandability check over a LearnPAd model.
+
+# How it works?
+The plugin is specific for the Verification Component and provide understandability verification of a LearnPAd model. In order to work it must be placed in the plugin folder defined on the Verification Component and it will be automatically recognized.
+This operation is currently automated by maven during the installation phase of the Verification Component.
+
+# Configuration
+No configuration needed
+
+# Interfaces
+In order to be recognized by the Verification Component, this plugin expose the following interface src/main/java/eu/learnpad/verification/plugin/interfaces/Plugin.java 
+and define this MANIFEST.MF /src/main/resources/custom/MANIFEST.MF
+
+The output structure of the verification provided by this plugin is reported in the following:
+
+
+	<UnderstandabilityResult>			
+   			<VerificationType>..type of the verification..</VerificationType>
+   			<DefinitionID>PROCESS_1</DefinitionID> ..id of definition..
+			<Status>OK or KO</Status> ..status of the verification..
+			<Description>Summary Description of result</Description>
+			<Guidelines>
+				<Guideline id="" Name=""> ..id and name of the guideline..
+					<Description>..detailed description of guideline..</Description>
+					<Suggestion>..suggestion of the specific problem..</Suggestion>
+					<Elements>..elements of the specific problem..
+						<ElementID refProcessID="" refName="" >..bpmn object id..</ElementID>
+					</Elements>
+				</Guideline>
+				...
+				<Guideline id="" Name="">
+					<Description>..detailed description of guideline..</Description>
+					<Suggestion>..suggestion of the specific problem..</Suggestion>
+					<Elements>..elements of the specific problem..
+						<ElementID refProcessID="" refName="" >..bpmn object id..</ElementID>
+					</Elements>
+				</Guideline>	
+				...		
+			</Guidelines>
+	</UnderstandabilityResult>
+
+In case of any error in the verification phase, the plugin output will look like in the following:
+
+	<ErrorResult>
+			<Status>ERROR</Status>
+			<Description>..error message..</Description>
+	</ErrorResult>
 
 Learn PAd project - Model-Based Social Learning for Public Administrations
 ==========================================================================
@@ -55,41 +110,4 @@ related modeling standards.
 |  8  | UNIVERSITA DEGLI STUDI DELL'AQUILA | UNIVAQ        | Italy       | 1                   | 30                 |
 |  9  | XWIKI SAS                          | XWIKI SAS     | France      | 1                   | 30                 |
 
-# The platform
-## Build
-First of all, clone the repository.
-
-```
-git clone https://github.com/LearnPAd/learnpad.git
-```
-
-Then, once cloned, you can trigger a build with the `build` script in the root directory.
-```
-./build
-```
-
-## Run it!
-After the build, a complete wiki instance will exists in the directory `lp-platform` and it will
-be the core of the platform.  You should be able to run the platform with the
-following command
-
-```
-bash launch start
-```
-
-You can also stop it with the following command.
-```
-bash launch stop
-```
-or restart it (it will stop every component then start it again)
-```
-bash launch restart
-```
-
-Once the platform is started, access it on `localhost:8080` in your webbrowser.
-
-## Components
-Learn PAd platform is a set of components, each one is in an independent
-directory.  To know the exact list of components in the platform, you can look
-into the `.components` file.
 
