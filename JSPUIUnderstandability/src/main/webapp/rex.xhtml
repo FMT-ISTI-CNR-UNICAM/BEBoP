@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Window Scope - Page 1</title>
+</h:head>
+<h:body>
+	<h2>Page 1</h2>
+	<!-- <f:facet name="last">
+		<h:outputStylesheet library="css" name="style.css" />
+	</f:facet> -->
+	
+	<h:form prependId="false">
+		<!-- style="background: red;" styleClass="" -->
+`		<ace:accordion  id="accordion" collapsible="true" autoHeight="false" >
+			<ace:accordionPane  id="maiz" title="Maiz"   >
+			<h:panelGrid columns="3" style=".ui-state-default {color: red;}">
+			<ice:outputText value="ciao " />
+						</h:panelGrid>
+			
+			</ace:accordionPane>
+
+			<ace:accordionPane id="cafe" title="Café">
+			</ace:accordionPane>
+
+			<ace:accordionPane id="papa" title="Papa">
+			</ace:accordionPane>
+		</ace:accordion>
+		
+		 <ace:panel id="panel" style="background: green;"
+                       header="ICEfaces Header"
+                       closable="true"
+                       toggleable="true"
+                       collapsed="true">
+                
+                <h:panelGrid>
+                    <h:outputText value="ICEfaces 2 is an open-source Rich Internet Application (RIA) development framework based on the JavaServer Faces (JSF) 2 standard. Like its predecessor, ICEfaces 1.8, ICEfaces 2 extends JSF to simplify development and enhance the standard JSF feature set - simultaneously improving developer efficiency and expanding the spectrum of RIA capabilities that can be included in any JSF-based web application."/>
+                    <h:outputText value="Adhering closely to the standard JSF 2 extension points allows ICEfaces to work transparently with the stock JSF framework, simplifying integration and fostering 3rd party compatibility with other JSF 2-compliant libraries."/>
+                </h:panelGrid>
+            </ace:panel>
+	
+	 <ace:panel id="panel2" style="background: red;"
+                       header="ICEfaces Header"
+                       closable="false"
+                       toggleable="true"
+                       collapsed="true">
+                
+                <h:panelGrid >
+                    <h:outputText value="ICEfaces 2 is an open-source Rich Internet Application (RIA) development framework based on the JavaServer Faces (JSF) 2 standard. Like its predecessor, ICEfaces 1.8, ICEfaces 2 extends JSF to simplify development and enhance the standard JSF feature set - simultaneously improving developer efficiency and expanding the spectrum of RIA capabilities that can be included in any JSF-based web application."/>
+                    <h:outputText value="Adhering closely to the standard JSF 2 extension points allows ICEfaces to work transparently with the stock JSF framework, simplifying integration and fostering 3rd party compatibility with other JSF 2-compliant libraries."/>
+                </h:panelGrid>
+            </ace:panel>
+            
+            
+            <h3>DataModel</h3>
+    <p:accordionPanel value="CIAO" var="car" style="background-color:  #47d147;">
+        <p:tab title="Car - " titleStyle="background:  #47d147;" ariaLabel="ll" >
+           
+                                 
+                <h:outputText value="Brand:" style="font-weight: bold; background:  white;" />
+              
+ 
+                <h:outputText value="Year:" style="font-weight: bold" />
+               
+ 
+                <h:outputText value="Color:" style="font-weight: bold" />
+               
+          
+        </p:tab>
+    </p:accordionPanel> 
+            
+	
+	</h:form>
+	
+	
+</h:body>
+</html>
