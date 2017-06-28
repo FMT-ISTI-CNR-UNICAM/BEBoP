@@ -71,6 +71,7 @@ public class ModelLoops extends abstractGuideline {
 								if(ingateway){
 									List<SequenceFlow> flowsoutg = outg.getOutgoing();
 									for (SequenceFlow sequenceFlow : flowsoutg) {
+										if(sequenceFlow.getTargetRef()!=null)
 										if(sequenceFlow.getTargetRef().equals(ing)){
 											flag=true;
 											elementsBPMN.add(fe);
