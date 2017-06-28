@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>verification-component-understandability-plugin</artifactId>
 	<packaging>war</packaging>
-
+	<version>1</version>
 
 	<repositories>
 		<repository>
@@ -164,11 +164,6 @@
 	<scm>
 		<developerConnection>Giorgio Spagnolo</developerConnection>
 	</scm>
-	<parent>
-		<groupId>eu.learnpad</groupId>
-		<artifactId>lp-model-verification</artifactId>
-		<version>1.0</version>
-		<relativePath>..</relativePath>
-	</parent>
+	
 	<groupId>eu.learnpad.vc.understandability</groupId>
 </project>
