@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Result - Analysis</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<!-- load diagram-js styles and bpmn styles including the cool bpmn font -->
+	<h:outputStylesheet library="webjars"
+		name="bpmn-js/0.12.0-0/assets/diagram-js.css" />
+	<h:outputStylesheet library="webjars"
+		name="bpmn-js/0.12.0-0/assets/bpmn-font/css/bpmn-embedded.css" />
+
+	<h:outputStylesheet library="css" name="modeler.css" />
+
+	<!-- load jquery -->
+	<h:outputScript library="webjars" name="jquery/2.1.3/jquery.js" />
+
+	<!-- load bpmn-js dependencies -->
+	<h:outputScript library="webjars" name="lodash/2.4.1-6/lodash.min.js" />
+	<h:outputScript library="webjars" name="sax/0.6.0/lib/sax.js" />
+	<h:outputScript library="webjars" name="Snap.svg/0.3.0/snap.svg-min.js" />
+	<h:outputScript library="webjars"
+		name="jquery-mousewheel/3.1.11/jquery.mousewheel.js" />
+
+	<!-- bpmn-js viewer -->
+	
+	<h:outputScript library="webjars" name="bpmn-js/0.12.0-0/bpmn-viewer.js" />
+	<h:outputScript library="webjars"
+		name="bpmn-js/0.12.0-0/bpmn-navigated-viewer.min.js" />
+
+</h:head>
+<h:body>
+
+	<h:form>
+
+
+
+
+
+
+
+
+
+
+		<h:commandButton value="Return"
+			action="#{pageController.navigatePageCF}" />
+
+
+
+		<br />
+
+	
+		<!--    <ace:accordion id="accordionPanel" autoHeight="false" event="mouseover" effect="bounceslide">
+           
+            <c:forEach items="#{DataAnalysis.guidelines}"
+			var="data" varStatus="status">-->
+		<!--   <ace:accordionPane id="toGL_#{status.index}" title="GuideLane ID: #{data.id} - #{data.name}"  style="background-color: #{data.color}" >-->
+	
+	<p:panelGrid  border="1"  cellspacing="1" style="width: 100%;">
+	<f:facet name="header" >
+	 <p:row>
+	 <p:column colspan="2">
+		<h:outputText value="BEBoP Result " style="font-weight: bold;font-size:20px" />	
+		<br/>
+		<h:outputText  value="Guidelines respected: " />
+			<h:outputText  value="#{DataAnalysis.statistics}" style="font-weight: bold; background-color: #{DataAnalysis.color};" />
+		</p:column>
+		</p:row>
+		</f:facet>
+		<p:row>
+		
+		<p:column rowspan="1" style="width: 37%;">
+		<p:accordionPanel value="#{DataAnalysis.guidelines}" var="data"
+			style="border: 1px solid #a8a8a8;" multiple="false">
+			<p:tab title="Guideline ID: #{data.id} - #{data.name}"
+				titleStyle="background: #{data.color};">
+				<h:outputText value="Description: " style="font-weight: bold;" />
+				<h:outputText value="#{data.description}" />
+
+				<br />
+				<h:outputText value="Suggestion: " style="font-weight: bold;" />
+				<h:outputText value="#{data.suggestion}" />
+				<br />
+				<p:accordionPanel value="#{data.elements}" var="element"
+					style="border: 1px solid #a8a8a8;" multiple="false">
+
+					<p:tab title="Element Name: #{element.name}"
+						titleStyle="background: #{data.color};">
+						<h:outputText
+							value="Element ID: #{element.value} Process Ref: #{element.refprocessid}" />
+
+					</p:tab>
+				</p:accordionPanel>
+			</p:tab>
+		</p:accordionPanel>
+		</p:column>
+		<!--   </ace:accordionPane>
+                </c:forEach>-->
+		<!-- </ace:accordion>-->
+		<p:column rowspan="1">
+		<div class="content" id="js-drop-zone" style="height:805px;">
+		<div id="diagramCanvas"/>
+	</div>
+	</p:column>
+</p:row>
+</p:panelGrid>
+	</h:form>
+
+
+	
+<h:outputScript>	
+		var data =' #{DataAnalysis.data}';
+		
+		if(data!=null){
+		openFromUrl(data);
+		}
+		
+		function openFromUrl(data) {
+			var BpmnViewer = window.BpmnJS;
+			var viewer = new BpmnViewer({
+				container : '#diagramCanvas'
+			});
+	
+
+
+			var container = $('#js-drop-zone');
+
+			viewer.importXML(data, function(err) {
+				if (err) {
+					console.log('error rendering', err);
+				} else {
+					var canvas = viewer.get('canvas');
+					// zoom to fit full viewport
+					canvas.zoom('fit-viewport');
+					container.removeClass('with-error')
+							.addClass('with-diagram');
+					var guidelineelements = '#{DataAnalysis.elements}';
+					if(guidelineelements!=null){
+						var gs= guidelineelements.split(",");
+							gs.forEach(function(elements) {
+							console.log(elements);
+								var ele = elements.replace('[','').replace(']','').replace(' ','');
+										canvas.addMarker(ele, 'highlight');
+						
+								});
+					}
+							 
+							 
+						
+		   						
+		   						 var eventBus = viewer.get('eventBus');
+
+		   					    // you may hook into any of the following events
+		   					    var events = [
+		   					      'element.hover',
+		   					      'element.out',
+		   					      'element.click',
+		   					      'element.dblclick',
+		   					      'element.mousedown',
+		   					      'element.mouseup'
+		   					    ];
+
+		   					    events.forEach(function(event) {
+									if(event!=null)
+									if(eventBus!=null){
+		   					      eventBus.on(event, function(e) {
+		   					        // e.element = the model element
+		   					        // e.gfx = the graphical element
+		   					        if(event=='element.click')
+									alert("Element ID: "+ e.element.id);
+		   					        console.log(event, 'on', e.element.id);
+		   					      });
+		   					      }
+		   					    });	
+							
+						
+				}
+			});
+			
+			
+
+		};
+		
+		
+		
+	</h:outputScript>
+
+
+
+
+	<br />
+
+
+	<br />
+
+
+
+
+
+	<h:outputText style="font-weight: bold;font-size:200%;"
+		value="XML Version:" />
+	<br />
+	<br />
+	<h:outputText value="#{DataAnalysis.xml}"
+		style="white-space: pre-wrap;" styleClass="sxml" />
+
+
+
+<br/>
+
+<p>*This work has been partially founded by <a href="http://www.learnpad.eu" target="_blank">EU project LearnPAd</a>  (GA:619583).</p>
+
+<br/>
+<br/>
+<h:panelGrid columns="2" border="0" layout="block">
+<h:panelGroup>
+<div style="width: 600px;">
+<p align="center">
+ <a href="http://www.fmt.isti.cnr.it" target="_blank">Formal Methods &amp; Tools Group</a><br/>
+<a href="http://www.isti.cnr.it" target="_blank">Institute of information science and technologies "Alessandro Faedo"</a><br/>  
+<a href="http://www.cnr.it" target="_blank"><img  src="images/Logo_CNR-2010-ENG-high.png" style="height: 80px;" /></a>
+</p>
+</div>
+</h:panelGroup>
+<h:panelGroup>
+<div style="width: 300px;">
+<p align="center">
+<a href="http://www.cs.unicam.it/" target="_blank">Computer Science Division</a><br/>
+<a href="http://www.cs.unicam.it/" target="_blank">University of Camerino</a><br/>
+<a href="http://www.unicam.it" target="_blank"><img  src="images/Logo_unicam.png" style="height: 80px; "  /></a><br/>
+</p>
+</div>
+</h:panelGroup>
+</h:panelGrid>
+</h:body>
+</html>
