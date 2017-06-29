@@ -6,19 +6,23 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.glassfish.jersey.server.Uri;
 import org.junit.Test;
 
 import eu.learnpad.verification.plugin.bpmn.guideline.impl.abstractGuideline;
@@ -115,7 +119,7 @@ public class GuidelinesFactoryTest {
 		genarateTestforFileOk2("test7.bpmn","2");
 		genarateTestforFileOk2("TitoloUnico/19311.bpmn","14");
 	}
-/*	private void genarateTestforFileOk(String NameFile,String id){
+	/*	private void genarateTestforFileOk(String NameFile,String id){
 		try {
 
 			URL is = GuidelinesFactoryTest.class.getClassLoader().getResource(NameFile);
@@ -124,7 +128,7 @@ public class GuidelinesFactoryTest {
             temp.deleteOnExit();
 
             Files.copy(is,temp.toPath(),java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-			 
+
 
 			MyBPMN2ModelReader readerBPMN = new MyBPMN2ModelReader();
 
@@ -165,7 +169,7 @@ public class GuidelinesFactoryTest {
 
 	}*/
 
-	
+
 	private void genarateTestforFileOk2(String NameFile,String id){
 		try {
 
@@ -215,34 +219,34 @@ public class GuidelinesFactoryTest {
 
 
 	}
-	
-	
+
+
 	@Test
 	public void testGuidelinesFactoryListGood() {
 		List<String> ldirectory = new ArrayList<String>();
 		String sep = File.separator;
-	//	ldirectory.add("EPBR-Coordinator"+sep+"20903.bpmn");
+		//	ldirectory.add("EPBR-Coordinator"+sep+"20903.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21099.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21203.bpmn");
 		//ldirectory.add("EPBR-Coordinator"+sep+"21385.bpmn");
-	//	ldirectory.add("EPBR-Coordinator"+sep+"21417.bpmn");
-	//	ldirectory.add("EPBR-Coordinator"+sep+"21823.bpmn");
+		//	ldirectory.add("EPBR-Coordinator"+sep+"21417.bpmn");
+		//	ldirectory.add("EPBR-Coordinator"+sep+"21823.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"diagram.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"20250.bpmn");
 		//ldirectory.add("TitoloUnico"+sep+"20386.bpmn");
-//		ldirectory.add("TitoloUnico"+sep+"20461.bpmn");
+		//		ldirectory.add("TitoloUnico"+sep+"20461.bpmn");
 		for(String filename: ldirectory){
-	//	genarateTestforFileOk2(filename);
+			//	genarateTestforFileOk2(filename);
 		}
-		
+
 	}
-	
+
 	private void genarateTestforFileOk2(String NameFile){
 		try {
 			System.out.println(NameFile);
 			URL is = GuidelinesFactoryTest.class.getClassLoader().getResource(NameFile);
 			assertNotNull(is);
-			
+
 			/* File temp = File.createTempFile("tempfiletest", ".tmp"); 
             temp.deleteOnExit();
 
@@ -265,18 +269,18 @@ public class GuidelinesFactoryTest {
 
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		/*		String nFile = NameFile.replace(File.separator, "");
+			/*		String nFile = NameFile.replace(File.separator, "");
 		OutputStream os = new FileOutputStream( "nosferatuvv"+ nFile.substring(0, nFile.length()-4)+"xml" );
 			jaxbMarshaller.marshal( eg, os );
-			*/
-				if(!eg.getStatus().equals("OK")){
-					
-						fail();
-					
-				}
-			
+			 */
+			if(!eg.getStatus().equals("OK")){
 
-			
+				fail();
+
+			}
+
+
+
 
 			//jaxbMarshaller.marshal(eg, System.out);
 			//assertTrue(eg.getStatus().equals("OK"));
@@ -288,4 +292,65 @@ public class GuidelinesFactoryTest {
 
 
 	}
+
+	/*@Test
+	public void testSignavioModels() {
+		try{
+			String path = "C:\\Users\\winspa\\Dropbox\\LearnPad_Share_Folder\\MODELLI per Validazione\\";String sep = File.separator;
+			File folder = new File(path);
+			
+
+
+			List<File> list = Arrays.asList(folder.listFiles(new FilenameFilter(){
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".bpmn"); // or something else
+				}}));
+			for(File f: list){
+
+				try{
+					URL is = f.toURI().toURL();
+					assertNotNull(is);
+
+					MyBPMN2ModelReader readerBPMN = new MyBPMN2ModelReader();
+
+
+
+
+
+					GuidelinesFactory eg = new GuidelinesFactory(readerBPMN.readJavaURIModel(is.toURI().toString()));
+					eg.setVerificationType("UNDERSTANDABILITY");
+					eg.StartSequential();
+					//System.out.println(eg);
+
+					JAXBContext jaxbContext = JAXBContext.newInstance(GuidelinesFactory.class);
+					Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+					// output pretty printed
+					jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+				//	for ( abstractGuideline iterable_element : eg.getGuidelines()) {
+				//	if(iterable_element.getid().equals(id)){
+				//		if(!iterable_element.getStatus()){
+				//			fail();
+				//		}
+				//	}
+				//	}
+					new File("esaminati").mkdirs();
+					OutputStream os = new FileOutputStream("esaminati/BEPoP_"+ f.getName().substring(0, f.getName().length()-4)+".xml" );
+					jaxbMarshaller.marshal( eg, os );
+
+					//jaxbMarshaller.marshal(eg, System.out);
+					//assertTrue(eg.getStatus().equals("OK"));
+				}catch(JAXBException  | URISyntaxException e){
+					System.out.println(f.getName());
+					System.out.println(e.getMessage());
+				}
+
+			}
+
+		}catch(IOException e){
+
+		}
+	}*/
 }

@@ -76,7 +76,7 @@ public class LinearMessageFlows extends abstractGuideline{
 		}*/
 
 
-		//
+		//if(BPMNEdges!=null)
 		for (BaseElement bpmnelement : BPMNEdges.keySet()) {
 			if(bpmnelement instanceof MessageFlow){
 				MessageFlow base= (MessageFlow)bpmnelement;

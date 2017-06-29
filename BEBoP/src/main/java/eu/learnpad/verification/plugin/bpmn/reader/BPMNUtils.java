@@ -83,7 +83,7 @@ public class BPMNUtils {
 					return bpmnEdges;
 			}
 		}
-		return null;
+		return new HashMap<BaseElement, BPMNEdge>();
 	}
 
 	public static  java.util.Map<BaseElement,BPMNEdge>  getAllBPMNEdge(BPMNDiagram bpmnDiagram) {
