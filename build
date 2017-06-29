@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd JSPUIUnderstandability
+cd BEBoP-WebUserInterfaces
 mvn install -DskipTests=false
-cd ../verification-component-understandability-plugin
+cd ../BEBoP
 mvn install -DskipTests=false
