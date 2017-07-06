@@ -30,7 +30,7 @@ The service is available at `http://localhost:9982/BEBoP/`.
 
 # CURL Test
  * To send BPMN XML Model to component, the reply is a  id:  
-`curl -X POST -H "Content-Type: application/XML" --data @DatiCorrispettiviType.xml http://localhost:9982/BEBoP/validatemodel`
+`curl -X POST -H "Content-Type: application/XML" --data @BPMNMOdel.bpmn http://localhost:9982/BEBoP/validatemodel/put`
 
 * To get result from {id}:  
 `curl -X GET http://localhost:9982/BEBoP/validatemodel/{id}`
