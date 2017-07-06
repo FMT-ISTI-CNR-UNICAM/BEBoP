@@ -1,26 +1,52 @@
 * *Builds* [![Build Status](https://travis-ci.org/FMT-ISTI-CNR-UNICAM/BEBoP.svg?branch=master)](https://travis-ci.org/FMT-ISTI-CNR-UNICAM/BEBoP)
 
-Verification understandability component plugin
+BEBoP (understandaBility vErifier for Business Process models)
 ====================
 
 Information   | Value
 ------------- | --------
-Component     | Verification Understandability Plugin
+Component     | BEBoP (understandaBility vErifier for Business Process models)
 Partner       | Unicam, ISTI-CNR
-WP            | 4
-Responsible   | Andrea Polini <andrea.polini@unicam.it>
-Collaborators | Giorgio Spagnolo [spagnolo at isti.cnr.it],  Damiano Falcioni <damiano.falcioni@unicam.it> 
+Responsible   | Andrea Polini <andrea.polini@unicam.it>, Flavio Corradini, Alessio Ferrari, Stefania Gnesi, Barbara Re
+Collaborators | Giorgio Spagnolo [spagnolo at isti.cnr.it],  Fabrizio Fornari <fabrizio.fornari at unicam.it> 
 Roadmap       | http://wiki.learnpad.eu/LearnPAdWiki/bin/view/Component/Model+Verification
 
 # Summary
-This component is a plugin for the verification component that provide understandability check over a LearnPAd model.
+BEBoP (understandaBility vErifier for Business Process models) is a Java tool that supports BP designers in establishing whether their models comply with the understandability guidelines.
+The tool is developed as a Web service, and its basic graphical user interface can be accessed by users through any Web browser.
+The services of the tool can also be accessed by other software through its RESTful interface, and the tool can be integrated as a plug-in in other existing tools, and eventually extended.
+Currently, BEBoP has been integrated within the Learn PAd Modeling Environment, which is a platform for designing BPMN models oriented to Public Administration stakeholders, for
+which understandability of the models is a key quality aspect. 
+BEBoP reads a .bpmn file compliant with the OMG BPMN 2.0 standard, and produces a XML file that describes the guidelines that are not met and the BPMN elements violating them. Then, the
+XML file is loaded by the graphical user interface, which visualizes the violations of the guidelines in the model.
 
 # How it works?
-The plugin is specific for the Verification Component and provide understandability verification of a LearnPAd model. In order to work it must be placed in the plugin folder defined on the Verification Component and it will be automatically recognized.
-This operation is currently automated by maven during the installation phase of the Verification Component.
+This BEPOP expose REST API
+The component is ready to be packaged as a WAR to be deployed on an Application Server like jetty.
+
+The service is available at `http://localhost:9982/BEBoP/`.
+
+`http://localhost:9982/BEBoP/application.wadl`
+
+# CURL Test
+ * To send BPMN XML Model to component, the reply is a  id:  
+`curl -X POST -H "Content-Type: application/XML" --data @DatiCorrispettiviType.xml http://localhost:9982/BEBoP/validatemodel`
+
+* To get result from {id}:  
+`curl -X GET http://localhost:9982/BEBoP/validatemodel/{id}`
+
+* To get Status of {id}:  
+`curl -X GET http://localhost:9982/BEBoP/validatemodel/{id}/status`
+
 
 # Configuration
-No configuration needed
+* Install Java 1.7
+* Install Maven
+
+* to build `build` file
+* to run BEBoP in BEPOP directory `mvn jetty:run`
+ * to run BEBoP-UI in BEBoP-WebUserInterfaces directory `mvn jetty:run`
+
 
 # Interfaces
 In order to be recognized by the Verification Component, this plugin expose the following interface src/main/java/eu/learnpad/verification/plugin/interfaces/Plugin.java 
