@@ -7,8 +7,8 @@ Information   | Value
 ------------- | --------
 Component     | BEBoP (understandaBility vErifier for Business Process models)
 Partner       | Unicam, ISTI-CNR
-Responsible   | Andrea Polini <andrea.polini@unicam.it>, Flavio Corradini, Alessio Ferrari, Stefania Gnesi, Barbara Re
-Collaborators | Giorgio Spagnolo [spagnolo at isti.cnr.it],  Fabrizio Fornari <fabrizio.fornari at unicam.it> 
+Responsible   | Andrea Polini <andrea.polini@unicam.it>, Flavio Corradini, Alessio Ferrari, Stefania Gnesi, Barbara Re,  Fabrizio Fornari, Giorgio O. Spagnolo
+Developers    | Giorgio O. Spagnolo [spagnolo at isti.cnr.it],  Fabrizio Fornari <fabrizio.fornari at unicam.it> 
 Roadmap       | http://wiki.learnpad.eu/LearnPAdWiki/bin/view/Component/Model+Verification
 
 # Summary
