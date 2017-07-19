@@ -41,7 +41,7 @@ public class MinimizeModelSize extends abstractGuideline {
 				
 				IDProcess = process.getId();
 				for (FlowElement fe : process.getFlowElements()) {
-					if (fe instanceof Activity || fe instanceof Gateway || fe instanceof SubProcess) {
+					if (fe instanceof Activity || fe instanceof org.eclipse.bpmn2.Event ||  fe instanceof Gateway || fe instanceof SubProcess) {
 
 						i++;
 					}  
