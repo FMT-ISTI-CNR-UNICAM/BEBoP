@@ -16,12 +16,14 @@ import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.apache.commons.io.FileUtils;
 import org.glassfish.jersey.server.Uri;
 import org.junit.Test;
 
@@ -293,10 +295,11 @@ public class GuidelinesFactoryTest {
 
 	}
 
-	/*@Test
+	@Test
 	public void testSignavioModels() {
-		try{
-			String path = "C:\\Users\\winspa\\Dropbox\\LearnPad_Share_Folder\\MODELLI per Validazione\\";String sep = File.separator;
+		/*try{
+			String path = "C:\\Users\\winspa\\Google Drive\\isti\\modelCollection_1499071506741\\";
+			String sep = File.separator;
 			File folder = new File(path);
 			
 
@@ -306,7 +309,14 @@ public class GuidelinesFactoryTest {
 				public boolean accept(File dir, String name) {
 					return name.endsWith(".bpmn"); // or something else
 				}}));
-			for(File f: list){
+			List<String> ls  = new ArrayList<>();
+			
+			String[] SUFFIX = {"bpmn"};  
+			
+			 Collection<File> files = FileUtils.listFiles(folder, SUFFIX , true);
+			
+			
+			for(File f: files){
 
 				try{
 					URL is = f.toURI().toURL();
@@ -328,14 +338,15 @@ public class GuidelinesFactoryTest {
 
 					// output pretty printed
 					jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-				//	for ( abstractGuideline iterable_element : eg.getGuidelines()) {
-				//	if(iterable_element.getid().equals(id)){
-				//		if(!iterable_element.getStatus()){
-				//			fail();
-				//		}
-				//	}
-				//	}
+					
+					String item = f.getName()+";";
+					for ( abstractGuideline iterable_element : eg.getGuidelines()) {
+						boolean status = iterable_element.getStatus();
+						item+=status+";";
+						
+					}
+					item+="\n\r";
+					ls.add(item);
 					new File("esaminati").mkdirs();
 					OutputStream os = new FileOutputStream("esaminati/BEPoP_"+ f.getName().substring(0, f.getName().length()-4)+".xml" );
 					jaxbMarshaller.marshal( eg, os );
@@ -349,8 +360,9 @@ public class GuidelinesFactoryTest {
 
 			}
 
+			System.out.println(ls);
 		}catch(IOException e){
 
-		}
-	}*/
+		}*/
+	}
 }

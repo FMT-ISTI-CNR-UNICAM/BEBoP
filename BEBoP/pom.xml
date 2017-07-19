@@ -58,6 +58,11 @@
 			<artifactId>jersey-test-framework-provider-grizzly2</artifactId> <version>2.19</version> 
 			<scope>test</scope> </dependency> -->
 		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
@@ -164,6 +169,6 @@
 	<scm>
 		<developerConnection>Giorgio Spagnolo</developerConnection>
 	</scm>
-	
+
 	<groupId>eu.learnpad.vc.understandability</groupId>
 </project>

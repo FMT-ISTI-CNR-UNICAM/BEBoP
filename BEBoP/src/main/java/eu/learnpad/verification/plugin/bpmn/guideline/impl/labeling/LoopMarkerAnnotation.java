@@ -58,6 +58,7 @@ public class LoopMarkerAnnotation extends abstractGuideline{
 									for( Artifact artifact :  process.getArtifacts()){
 										if(artifact instanceof Association){
 											Association asso = (Association)artifact;
+											if(asso.getSourceRef()!=null && asso.getTargetRef()!=null ){
 											String source = asso.getSourceRef().toString();
 											String target = asso.getTargetRef().toString();
 											int starts = source.length();
@@ -77,6 +78,7 @@ public class LoopMarkerAnnotation extends abstractGuideline{
 												temp.append("* name=" + name + " ID=" + fe.getId() //$NON-NLS-1$ //$NON-NLS-2$
 														+ "\n"); //$NON-NLS-1$
 
+											}
 											}
 										}
 									}

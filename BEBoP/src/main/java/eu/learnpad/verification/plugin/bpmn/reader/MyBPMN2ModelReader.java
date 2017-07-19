@@ -81,7 +81,7 @@ public class MyBPMN2ModelReader {
         }catch( IOException e){
         
 
-            log.error("\nModel involved in the exception:\n"+uri.toString()+" "+e.getMessage());
+        //    log.error("\nModel involved in the exception:\n"+uri.toString()+" "+e.getMessage());
 
             //  e.printStackTrace();
         }
