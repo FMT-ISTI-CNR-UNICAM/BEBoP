@@ -24,6 +24,13 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.bpmn2.Activity;
+import org.eclipse.bpmn2.Definitions;
+import org.eclipse.bpmn2.FlowElement;
+import org.eclipse.bpmn2.Gateway;
+import org.eclipse.bpmn2.Process;
+import org.eclipse.bpmn2.RootElement;
+import org.eclipse.bpmn2.SubProcess;
 import org.glassfish.jersey.server.Uri;
 import org.junit.Test;
 
@@ -297,11 +304,11 @@ public class GuidelinesFactoryTest {
 
 	@Test
 	public void testSignavioModels() {
-		/*try{
+	/*	try{
 			String path = "C:\\Users\\winspa\\Google Drive\\isti\\modelCollection_1499071506741\\";
 			String sep = File.separator;
 			File folder = new File(path);
-			
+
 
 
 			List<File> list = Arrays.asList(folder.listFiles(new FilenameFilter(){
@@ -310,16 +317,25 @@ public class GuidelinesFactoryTest {
 					return name.endsWith(".bpmn"); // or something else
 				}}));
 			List<String> ls  = new ArrayList<>();
-			
+
 			String[] SUFFIX = {"bpmn"};  
-			
-			 Collection<File> files = FileUtils.listFiles(folder, SUFFIX , true);
-			
-			
+
+			Collection<File> files = FileUtils.listFiles(folder, SUFFIX , true);
+
+
 			for(File f: files){
 
 				try{
-					URL is = f.toURI().toURL();
+
+
+
+					String content = FileUtils.readFileToString(f, "UTF-8");
+					content = content.replaceAll("-", ".");
+					content = content.replaceAll("UTF.8", "UTF-8");
+					File tempFile = new File(f.getName()+"1");
+					FileUtils.writeStringToFile(tempFile, content, "UTF-8");
+
+					URL is = tempFile.toURI().toURL();
 					assertNotNull(is);
 
 					MyBPMN2ModelReader readerBPMN = new MyBPMN2ModelReader();
@@ -327,8 +343,25 @@ public class GuidelinesFactoryTest {
 
 
 
+					Definitions d = readerBPMN.readJavaURIModel(is.toURI().toString());
+					int i = 0;
+					for (RootElement rootElement : d.getRootElements()) {
+						if (rootElement instanceof Process) {
+							Process process = (Process) rootElement;
+							//System.out.format("Found a process: %s\n", process.getName());
+							
+							
+							for (FlowElement fe : process.getFlowElements()) {
+								if (fe instanceof Activity || fe instanceof org.eclipse.bpmn2.Event|| fe instanceof Gateway || fe instanceof SubProcess) {
 
-					GuidelinesFactory eg = new GuidelinesFactory(readerBPMN.readJavaURIModel(is.toURI().toString()));
+									i++;
+								}  
+							}
+
+						}
+					}
+					
+					GuidelinesFactory eg = new GuidelinesFactory(d);
 					eg.setVerificationType("UNDERSTANDABILITY");
 					eg.StartSequential();
 					//System.out.println(eg);
@@ -338,14 +371,14 @@ public class GuidelinesFactoryTest {
 
 					// output pretty printed
 					jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-					
+
 					String item = f.getName()+";";
 					for ( abstractGuideline iterable_element : eg.getGuidelines()) {
 						boolean status = iterable_element.getStatus();
 						item+=status+";";
-						
+
 					}
-					item+="\n\r";
+					item+=i+"\n\r";
 					ls.add(item);
 					new File("esaminati").mkdirs();
 					OutputStream os = new FileOutputStream("esaminati/BEPoP_"+ f.getName().substring(0, f.getName().length()-4)+".xml" );
