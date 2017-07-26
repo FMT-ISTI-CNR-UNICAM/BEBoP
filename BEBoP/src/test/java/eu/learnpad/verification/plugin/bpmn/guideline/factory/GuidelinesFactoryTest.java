@@ -304,7 +304,7 @@ public class GuidelinesFactoryTest {
 
 	@Test
 	public void testSignavioModels() {
-	/*	try{
+		try{
 			String path = "C:\\Users\\winspa\\Google Drive\\isti\\modelCollection_1499071506741\\";
 			String sep = File.separator;
 			File folder = new File(path);
@@ -396,6 +396,6 @@ public class GuidelinesFactoryTest {
 			System.out.println(ls);
 		}catch(IOException e){
 
-		}*/
+		}
 	}
 }
